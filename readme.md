@@ -19,11 +19,11 @@ Gedurende de cursus Spring Boot zal het langzamerhand duidelijk worden waarom je
 - Het project bevat een `ExceptionController`;
 - Het project bevat een `RecordNotFoundException`;
 - De **TelevisionsController** bevat: 
-  - een GET-request voor alle televisies
-  - een GET-request voor 1 televisie
-  - een POST-request voor 1 televisie
-  - een PUT-request voor 1 televisie
-  - een DELETE-request voor 1 televisie
+  x een GET-request voor alle televisies
+  x een GET-request voor 1 televisie
+  x een POST-request voor 1 televisie
+  x een PUT-request voor 1 televisie
+  x een DELETE-request voor 1 televisie
 - De **ExceptionController** bevat:
   - een exceptionhandler
 - De **RecordNotFoundException** bevat:
