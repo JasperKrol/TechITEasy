@@ -1,23 +1,22 @@
 package nl.techIT.techITeasy.controller;
 
-import org.apache.coyote.Response;
-import org.springframework.http.HttpStatus;
+import nl.techIT.techITeasy.model.Television;
+import nl.techIT.techITeasy.repository.TelevisionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
-/*
-onder in de pagina is de gemakkelijke crud te vinden uit de les
-
- */
 
 //aangeven dat dit een controller is
 @RestController
 public class TelevisionsController {
+
+    //Maak een link met de repository laag
+    @Autowired
+    private TelevisionRepository televisionRepository;
 
     //CRUD Requests
     //PathVaribale? Dan krijg je in de param @pathvariable
@@ -25,37 +24,39 @@ public class TelevisionsController {
 
     //Post
     @PostMapping(value = "/televisions")
-    public ResponseEntity<Object> addTelevision(@RequestBody String television) {
+    public ResponseEntity<Object> addBook(@RequestBody Television television) {
+        Television newTelevision = televisionRepository.save(television);
+        long newId = television.getId();
 
-        //nieuwe variable naam opvoeren
-        // in de buildAndExpand de nieuwe id/naam invoeren
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(newId).toUri();
-        //televisions.add(television)
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(newId).toUri();
+
         return ResponseEntity.created(location).build();
     }
 
     //Get
     @GetMapping(value = "/televisions")
-    public ResponseEntity<Object> getAllTelevisions(){
+    public ResponseEntity<Object> getAllTelevisions() {
         // in de ok()komt de body te staan
-        return ResponseEntity.ok();
+        return ResponseEntity.ok(televisionRepository.findAll());
     }
+
     @GetMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> getTelevision(@PathVariable("id") int id){
+    public ResponseEntity<Object> getTelevision(@PathVariable("id") int id) {
         // in de ok()komt de body te staan
-        return ResponseEntity.ok(.get(id));
+        return ResponseEntity.ok(televisionRepository.findAll());
     }
 
     //Put
     @PutMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable("id") int id, @RequestBody ... ....) {
+    public ResponseEntity<Object> updateTelevision(@PathVariable("id") int id, @RequestBody String name) {
         //televisions.set(id,television);
         return ResponseEntity.noContent().build();
     }
 
     //Delete
     @DeleteMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> deleteTelevision(@PathVariable("id") int id){
+    public ResponseEntity<Object> deleteTelevision(@PathVariable("id") Long id) {
         //televisions.remove(id)
         return ResponseEntity.noContent().build();
     }

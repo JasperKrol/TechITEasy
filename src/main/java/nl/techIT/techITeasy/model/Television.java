@@ -15,7 +15,7 @@ public class Television {
             strategy = GenerationType.SEQUENCE,
             generator = "television_sequence"
     )
-    private Long id;
+    Long id;
 
     private String type;
     private String brand;

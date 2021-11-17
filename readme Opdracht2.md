@@ -10,8 +10,8 @@ Je hebt de vorige les een begin gemaakt voor de applicatie voor je werkgever Tec
 
 ## Randvoorwaarden
 
-- Het project bevat, op de juiste plaats in de map-structuur, een map genaamd `Models`;
-- Het project bevat, op de juiste plaats in de map-structuur, een map genaamd `Repositories`;
+x Het project bevat, op de juiste plaats in de map-structuur, een map genaamd `Models`;
+x Het project bevat, op de juiste plaats in de map-structuur, een map genaamd `Repositories`;
 - Het project bevat een `Television` in de map `Models`;
 - Het project bevat een `TelevisionRepository`;
 - Het project bevat de volgende dependencies:
@@ -58,8 +58,8 @@ Door het gebruik van deze return fragmenten zul je de volgende foutmeldingen teg
 
 ## Stappenplan
 _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet zo goed weten waar je moet beginnen, kun je onderstaand stappenplan volgen:
-1. Voeg de benodigde dependencies toe aan je _POM.xml_ en laat `Maven` deze instaleren
-2. Voeg aan de _application.properties_ de benodigde properties toe
+**1**. Voeg de benodigde dependencies toe aan je _POM.xml_ en laat `Maven` deze instaleren
+**2**. Voeg aan de _application.properties_ de benodigde properties toe
 3. Maak een nieuwe database aan in `PgAdmin` (zorg dat de naam overeenkomt met de properties in je _application.properties)
 4. Maak een nieuwe map aan in je project voor `Models`
 5. Maak een nieuwe klasse genaamd `Television`
