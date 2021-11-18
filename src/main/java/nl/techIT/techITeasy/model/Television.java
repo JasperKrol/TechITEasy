@@ -20,26 +20,26 @@ public class Television {
     private String type;
     private String brand;
     private String name;
-    private double price;
-    private double availableSize;
-    private double refreshRate;
+    private Double price;
+    private Double availableSize;
+    private Double refreshRate;
     private String screenType;
     private String screenQuality;
-    private boolean smartTv;
-    private boolean wifi;
-    private boolean voiceControl;
-    private boolean hdr;
-    private boolean bluetooth;
-    private boolean ambiLight;
+    private Boolean smartTv;
+    private Boolean wifi;
+    private Boolean voiceControl;
+    private Boolean hdr;
+    private Boolean bleutooth;
+    private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
 
-
-    //Constructor
+    // Een default constructor
     public Television() {
     }
 
-    public Television(Long id, String type, String brand, String name, double price, double availableSize, double refreshRate, String screenType, String screenQuality, boolean smartTv, boolean wifi, boolean voiceControl, boolean hdr, boolean bluetooth, boolean ambiLight, Integer originalStock, Integer sold) {
+    // Een constructor met alle gevraagde variable
+    public Television(Long id, String type, String brand, String name, Double price, Double availableSize, Double refreshRate, String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bleutooth, Boolean ambiLight, Integer originalStock, Integer sold) {
         this.id = id;
         this.type = type;
         this.brand = brand;
@@ -53,14 +53,13 @@ public class Television {
         this.wifi = wifi;
         this.voiceControl = voiceControl;
         this.hdr = hdr;
-        this.bluetooth = bluetooth;
+        this.bleutooth = bleutooth;
         this.ambiLight = ambiLight;
         this.originalStock = originalStock;
         this.sold = sold;
     }
 
-    //Getters and setters
-
+    // Alle getters en setters
     public Long getId() {
         return id;
     }
@@ -93,27 +92,27 @@ public class Television {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public double getAvailableSize() {
+    public Double getAvailableSize() {
         return availableSize;
     }
 
-    public void setAvailableSize(double availableSize) {
+    public void setAvailableSize(Double availableSize) {
         this.availableSize = availableSize;
     }
 
-    public double getRefreshRate() {
+    public Double getRefreshRate() {
         return refreshRate;
     }
 
-    public void setRefreshRate(double refreshRate) {
+    public void setRefreshRate(Double refreshRate) {
         this.refreshRate = refreshRate;
     }
 
@@ -133,51 +132,51 @@ public class Television {
         this.screenQuality = screenQuality;
     }
 
-    public boolean isSmartTv() {
+    public Boolean getSmartTv() {
         return smartTv;
     }
 
-    public void setSmartTv(boolean smartTv) {
+    public void setSmartTv(Boolean smartTv) {
         this.smartTv = smartTv;
     }
 
-    public boolean isWifi() {
+    public Boolean getWifi() {
         return wifi;
     }
 
-    public void setWifi(boolean wifi) {
+    public void setWifi(Boolean wifi) {
         this.wifi = wifi;
     }
 
-    public boolean isVoiceControl() {
+    public Boolean getVoiceControl() {
         return voiceControl;
     }
 
-    public void setVoiceControl(boolean voiceControl) {
+    public void setVoiceControl(Boolean voiceControl) {
         this.voiceControl = voiceControl;
     }
 
-    public boolean isHdr() {
+    public Boolean getHdr() {
         return hdr;
     }
 
-    public void setHdr(boolean hdr) {
+    public void setHdr(Boolean hdr) {
         this.hdr = hdr;
     }
 
-    public boolean isBluetooth() {
-        return bluetooth;
+    public Boolean getBleutooth() {
+        return bleutooth;
     }
 
-    public void setBluetooth(boolean bluetooth) {
-        this.bluetooth = bluetooth;
+    public void setBleutooth(Boolean bleutooth) {
+        this.bleutooth = bleutooth;
     }
 
-    public boolean isAmbiLight() {
+    public Boolean getAmbiLight() {
         return ambiLight;
     }
 
-    public void setAmbiLight(boolean ambiLight) {
+    public void setAmbiLight(Boolean ambiLight) {
         this.ambiLight = ambiLight;
     }
 

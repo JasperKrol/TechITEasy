@@ -1,4 +1,4 @@
-package nl.techIT.techITeasy;
+package nl.techIT.techITeasy.service;
 
 import nl.techIT.techITeasy.repository.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

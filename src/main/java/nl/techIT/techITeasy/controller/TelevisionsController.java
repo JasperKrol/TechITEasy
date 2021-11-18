@@ -22,18 +22,6 @@ public class TelevisionsController {
     //PathVaribale? Dan krijg je in de param @pathvariable
     // wijzig je iets of geef je iets door @Request body - put/post - heeft beide in parameters functie
 
-    //Post
-    @PostMapping(value = "/televisions")
-    public ResponseEntity<Object> addBook(@RequestBody Television television) {
-        Television newTelevision = televisionRepository.save(television);
-        long newId = television.getId();
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newId).toUri();
-
-        return ResponseEntity.created(location).build();
-    }
-
     //Get
     @GetMapping(value = "/televisions")
     public ResponseEntity<Object> getAllTelevisions() {
@@ -47,17 +35,29 @@ public class TelevisionsController {
         return ResponseEntity.ok(televisionRepository.findAll());
     }
 
-    //Put
-    @PutMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable("id") int id, @RequestBody String name) {
-        //televisions.set(id,television);
-        return ResponseEntity.noContent().build();
+    //Post
+    @PostMapping(value = "/televisions")
+    public ResponseEntity<Object> addBook(@RequestBody Television television) {
+        Television newTelevision = televisionRepository.save(television);
+        long newId = newTelevision.getId();
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(newId).toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     //Delete
     @DeleteMapping(value = "/televisions/{id}")
     public ResponseEntity<Object> deleteTelevision(@PathVariable("id") Long id) {
         //televisions.remove(id)
+        return ResponseEntity.noContent().build();
+    }
+
+    //Put
+    @PutMapping(value = "/televisions/{id}")
+    public ResponseEntity<Object> updateTelevision(@PathVariable("id") int id, @RequestBody String name) {
+        //televisions.set(id,television);
         return ResponseEntity.noContent().build();
     }
 }
