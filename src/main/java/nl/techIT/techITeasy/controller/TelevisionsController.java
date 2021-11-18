@@ -2,6 +2,7 @@ package nl.techIT.techITeasy.controller;
 
 import nl.techIT.techITeasy.model.Television;
 import nl.techIT.techITeasy.repository.TelevisionRepository;
+import nl.techIT.techITeasy.service.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class TelevisionsController {
 
     //Maak een link met de repository laag
     @Autowired
-    private TelevisionRepository televisionRepository;
+    private TelevisionService televisionService;
 
     //CRUD Requests
     //PathVaribale? Dan krijg je in de param @pathvariable
@@ -24,22 +25,22 @@ public class TelevisionsController {
 
     //Get
     @GetMapping(value = "/televisions")
-    public ResponseEntity<Object> getAllTelevisions() {
+    public ResponseEntity<Object> getAllTelevisions(@RequestParam(name = "title", defaultValue = "")String title) {
         // in de ok()komt de body te staan
-        return ResponseEntity.ok(televisionRepository.findAll());
+        return ResponseEntity.ok(televisionService.getTelevisions(title));
     }
 
     @GetMapping(value = "/televisions/{id}")
     public ResponseEntity<Object> getTelevision(@PathVariable("id") int id) {
         // in de ok()komt de body te staan
-        return ResponseEntity.ok(televisionRepository.findAll());
+        return ResponseEntity.ok(televisionService.getTelevision(id));
     }
 
     //Post
     @PostMapping(value = "/televisions")
-    public ResponseEntity<Object> addBook(@RequestBody Television television) {
-        Television newTelevision = televisionRepository.save(television);
-        long newId = newTelevision.getId();
+    public ResponseEntity<Object> addTelevision(@RequestBody Television television) {
+
+        long newId = televisionService.addTelevision(television);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newId).toUri();
