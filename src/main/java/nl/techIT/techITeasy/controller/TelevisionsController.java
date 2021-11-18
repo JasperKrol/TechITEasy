@@ -1,7 +1,6 @@
 package nl.techIT.techITeasy.controller;
 
 import nl.techIT.techITeasy.model.Television;
-import nl.techIT.techITeasy.repository.TelevisionRepository;
 import nl.techIT.techITeasy.service.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
