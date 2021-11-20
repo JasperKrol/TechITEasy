@@ -30,7 +30,7 @@ public class TelevisionsController {
     }
 
     @GetMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> getTelevision(@PathVariable("id") int id) {
+    public ResponseEntity<Object> getTelevision(@PathVariable("id") Long id) {
         // in de ok()komt de body te staan
         return ResponseEntity.ok(televisionService.getTelevision(id));
     }
@@ -50,14 +50,22 @@ public class TelevisionsController {
     //Delete
     @DeleteMapping(value = "/televisions/{id}")
     public ResponseEntity<Object> deleteTelevision(@PathVariable("id") Long id) {
-        //televisions.remove(id)
+        televisionService.deleteTelevision(id);
         return ResponseEntity.noContent().build();
     }
 
     //Put
     @PutMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable("id") int id, @RequestBody String name) {
+    public ResponseEntity<Object> updateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
         //televisions.set(id,television);
+        return ResponseEntity.noContent().build();
+    }
+
+    //Patch
+    @PatchMapping(value = "/televisions/{id}")
+    public ResponseEntity<Object> partialUpdateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
+        televisionService.partialUpdateTelevision(id, television);
+
         return ResponseEntity.noContent().build();
     }
 }
