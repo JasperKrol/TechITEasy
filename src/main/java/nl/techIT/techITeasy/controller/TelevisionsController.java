@@ -57,7 +57,7 @@ public class TelevisionsController {
     //Put
     @PutMapping(value = "/televisions/{id}")
     public ResponseEntity<Object> updateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
-        //televisions.set(id,television);
+        televisionService.updateTelevision(id, television);
         return ResponseEntity.noContent().build();
     }
 

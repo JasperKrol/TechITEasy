@@ -21,6 +21,7 @@ public class TelevisionService {
         this.televisionRepository = televisionRepository;
     }
 
+    // TODO: 20-11-2021  Long - Int ID SWITCH Vragen
     public Iterable<Television> getTelevisions(String name) {
         if (name.isEmpty()) {
             return televisionRepository.findAll();
@@ -29,11 +30,11 @@ public class TelevisionService {
         }
     }
 
-    public Iterable getTelevision(Long id) {
+    public Television getTelevision(Long id) {
         Optional<Television> optionalTelevision = televisionRepository.findById(Math.toIntExact(id));
 
         if (optionalTelevision.isPresent()) {
-            return (Iterable) optionalTelevision.get();
+            return optionalTelevision.get();
         } else {
             throw new RecordNotFoundException("ID not found");
         }
@@ -52,9 +53,44 @@ public class TelevisionService {
     }
 
     public void deleteTelevision(Long id) {
+        if (televisionRepository.existsById(Math.toIntExact(id))){
+            televisionRepository.deleteById(Math.toIntExact(id));
+        } else {
+            throw new BadRequestException("ID not found!");
+        }
 
     }
 
+    public void updateTelevision(long id, Television television) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(Math.toIntExact(id));
+
+        if (optionalTelevision.isPresent()){
+            Television existingTV = optionalTelevision.get();
+
+            television.setId(existingTV.getId());
+            televisionRepository.save(television);
+
+        }
+    }
+
     public void partialUpdateTelevision(long id, Television television) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(Math.toIntExact(id));
+        // conditie maken of dat hij er wel is
+        if (optionalTelevision.isPresent()) {
+            Television storedTV = televisionRepository.findById(Math.toIntExact(id)).orElse(null);
+
+            //conditie maken om te kijken wat er gewijzigd is (ifnot empty -> then
+            if (television.getName() != null && !television.getName().isEmpty()) {
+                storedTV.setName(television.getName());
+            }
+            if (television.getPrice() != null && !television.getPrice().isNaN()) {
+                storedTV.setPrice(television.getPrice());
+            }
+            //opslaan van de wijzing in het storedbook varabele
+            televisionRepository.save(storedTV);
+        } else {
+            throw new RecordNotFoundException("No Book with that id found");
+        }
+
     }
 }
