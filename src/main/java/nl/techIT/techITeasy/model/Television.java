@@ -29,7 +29,7 @@ public class Television {
     private Boolean wifi;
     private Boolean voiceControl;
     private Boolean hdr;
-    private Boolean bleutooth;
+    private Boolean bluetooth;
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
@@ -39,7 +39,7 @@ public class Television {
     }
 
     // Een constructor met alle gevraagde variable
-    public Television(Long id, String type, String brand, String name, Double price, Double availableSize, Double refreshRate, String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bleutooth, Boolean ambiLight, Integer originalStock, Integer sold) {
+    public Television(Long id, String type, String brand, String name, Double price, Double availableSize, Double refreshRate, String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bluetooth, Boolean ambiLight, Integer originalStock, Integer sold) {
         this.id = id;
         this.type = type;
         this.brand = brand;
@@ -53,13 +53,13 @@ public class Television {
         this.wifi = wifi;
         this.voiceControl = voiceControl;
         this.hdr = hdr;
-        this.bleutooth = bleutooth;
+        this.bluetooth = bluetooth;
         this.ambiLight = ambiLight;
         this.originalStock = originalStock;
         this.sold = sold;
     }
 
-    // Alle getters en setters
+    // A
     public Long getId() {
         return id;
     }
@@ -164,12 +164,12 @@ public class Television {
         this.hdr = hdr;
     }
 
-    public Boolean getBleutooth() {
-        return bleutooth;
+    public Boolean getBluetooth() {
+        return bluetooth;
     }
 
-    public void setBleutooth(Boolean bleutooth) {
-        this.bleutooth = bleutooth;
+    public void setBluetooth(Boolean bluetooth) {
+        this.bluetooth = bluetooth;
     }
 
     public Boolean getAmbiLight() {

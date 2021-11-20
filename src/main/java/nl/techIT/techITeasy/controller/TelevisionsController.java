@@ -24,7 +24,7 @@ public class TelevisionsController {
 
     //Get
     @GetMapping(value = "/televisions")
-    public ResponseEntity<Object> getAllTelevisions(@RequestParam(name = "title", defaultValue = "")String title) {
+    public ResponseEntity<Object> getAllTelevisions(@RequestParam(name = "title", defaultValue = "") String title) {
         // in de ok()komt de body te staan
         return ResponseEntity.ok(televisionService.getTelevisions(title));
     }
