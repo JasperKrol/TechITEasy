@@ -60,8 +60,8 @@ _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet z
 16. [x] Return als laatste stap in deze functie, het _dto_ object en sluit de functie af
 17. [x] Maak een klasse aan in de map `Dtos` genaamd `TelevisionInputDto`
 18. [x] Defenieer ook in deze klasse alle variabelen die een `Television` object bevat
-19. [] Maak een `public` functie genaamd `toTelevision()` met returnwaarde `Television`
-20. [] Maak in deze functie een `var television = new Television();`
-21. [] Voeg in de functie voor iedere _variable_, die je boven deze functie hebt gedeclareerd, een toewijzing naar de television variable (bijvoorbeeld: `television.setName(name);` )
+19. [x] Maak een `public` functie genaamd `toTelevision()` met returnwaarde `Television`
+20. [x] Maak in deze functie een `var television = new Television();`
+21. [x] Voeg in de functie voor iedere _variable_, die je boven deze functie hebt gedeclareerd, een toewijzing naar de television variable (bijvoorbeeld: `television.setName(name);` )
 22. [] Pas de `RequestMappings` in de `TelevisionController`, zodat de controller het verzoek doet aan de _servicelaag_ en het response ook ontvangt van de _servicelaag_ (dit omdat we de `Controller` eigenlijk zo dom mogelijk willen houden)
 23. [] Pas de _servicelaag_ zo aan dat deze gebruik maakt van de gegevens die de _controllerlaag_ doorgeeft, de `Service` moet hier dan de logica aan toepassen om met gebruik van de `Dtos` een _returnwaarde_ terug te kunnen sturen naar de controller

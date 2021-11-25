@@ -12,6 +12,7 @@ import java.net.URI;
 
 //aangeven dat dit een controller is
 @RestController
+@RequestMapping("televisions")
 public class TelevisionsController {
 
     //Maak een link met de repository laag
