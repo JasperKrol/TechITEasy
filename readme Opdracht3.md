@@ -18,15 +18,15 @@ Je hebt de vorige les de applicatie voor je werkgever TechItEasy uitgebreid met 
   - [x] de connectie van de `Service` en de `Repository` door middel van een _autowired_
   - [x] een _functie_ voor het ophalen van alle `Televisions`
   - [x] een _functie_ voor het ophalen van 1 `Television`
-  - [] een _functie_ voor het opslaan van 1 `Television`
-  - [] een _functie_ voor het verwijderen van 1 `Television`
+  - [x] een _functie_ voor het opslaan van 1 `Television`
+  - [x] een _functie_ voor het verwijderen van 1 `Television`
   - [] een _functie_ voor het update van 1 `Television`
-- [] De `Controller` is door middel van een _autowired_ gelinkt aan de `Service`
+- [x] De `Controller` is door middel van een _autowired_ gelinkt aan de `Service`
 - Het project bevat, op de juiste plaats in de map-structuur, een map genaamd `Dtos`
 - De map `Dtos` bevat een `TelevisionDto` en een `TelevisionInputDto`
-- [] De _requestMappings_ in de `Controller` worden aangepast zodat deze de juiste response doorgeven via de `Service`
+- [x] De _requestMappings_ in de `Controller` worden aangepast zodat deze de juiste response doorgeven via de `Service`
 - [] De `Service` maakt gebruik van de gegevens die via de `Controller` doorkrijgen van de `Dtos`
-- [] Het project bevat de _validator_ dependency uit hoofdstuk 8.1 van de Spring Boot cursus in `Edhub`
+- [x] Het project bevat de _validator_ dependency uit hoofdstuk 8.1 van de Spring Boot cursus in `Edhub`
 
 ### Belangrijk
 - Na deze les moeten de _requestMappings_ in de controller de juiste responses geven
@@ -42,26 +42,26 @@ Je hebt de vorige les de applicatie voor je werkgever TechItEasy uitgebreid met 
 
 ## Stappenplan
 _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet zo goed weten waar je moet beginnen, kun je onderstaand stappenplan volgen:
-1. [] Voeg de benodigde dependencies toe aan je _POM.xml_ en laat `Maven` deze instaleren
-2. [] Maak een map genaamd `Services` aan in de map-structuur
-3. [] Maak een _klasse_ genaamd `TelevisionService` aan in de map `Services`
-4. [] Voeg de `Service` _annotatie_ boven de _klasse_ toe
-5. [] Maak in de `TelevisionService` een _private_ variabele aan voor de `TelevisionRepository`
-6. [] Voeg een `@Autowired` toe om de `Repository` in de `TelevisionService` te kunnen gebruiken
-7. [] Maak in de `TelevisionService` de functie _getTelevisions_ aan de hand van het voorbeeld in hoofdstuk 6.2 van de cursus Spring Boot cursus in `Edhub`
-8. [] Doe dit ook voor de _getTelevision_, _saveTelevision_, _updateTelevision_ en de _deleteTelevision_
-9. [] Maak in de `TelevisionController` een `@Autowired` om de `Service` te kunnen gebruiken in de `Controller`
-10. Maak in het project een map aan genaamd `Dtos`
-11. Maak in deze map een klasse aan genaamd `TelevisionDto`
-12. Defenieer in deze klasse alle variabele die een `Television` object bevat (dezelfde als in het model gedefinieerd staan)
-13. Maak daaronder een `public` `static` functie aan genaamd _fromTelevision_. Deze heeft als returnwaarde `TelevisionDto` en als attribuut `Television television`
-14. Maak in deze functie een `var dto = new TelevisionDto();`
-15. Voeg in de functie voor iedere _variable_, die je boven deze functie hebt gedeclareerd, een toewijzing naar de dto variable (bijvoorbeeld: `dto.name = television.getName();` )
-16. Return als laatste stap in deze functie, het _dto_ object en sluit de functie af
-17. Maak een klasse aan in de map `Dtos` genaamd `TelevisionInputDto`
-18. Defenieer ook in deze klasse alle variabelen die een `Television` object bevat
-19. Maak een `public` functie genaamd `toTelevision()` met returnwaarde `Television`
-20. Maak in deze functie een `var television = new Television();`
-21. Voeg in de functie voor iedere _variable_, die je boven deze functie hebt gedeclareerd, een toewijzing naar de television variable (bijvoorbeeld: `television.setName(name);` )
+1. [x] Voeg de benodigde dependencies toe aan je _POM.xml_ en laat `Maven` deze instaleren
+2. [x] Maak een map genaamd `Services` aan in de map-structuur
+3. [x] Maak een _klasse_ genaamd `TelevisionService` aan in de map `Services`
+4. [x] Voeg de `Service` _annotatie_ boven de _klasse_ toe
+5. [x] Maak in de `TelevisionService` een _private_ variabele aan voor de `TelevisionRepository`
+6. [x] Voeg een `@Autowired` toe om de `Repository` in de `TelevisionService` te kunnen gebruiken
+7. [x] Maak in de `TelevisionService` de functie _getTelevisions_ aan de hand van het voorbeeld in hoofdstuk 6.2 van de cursus Spring Boot cursus in `Edhub`
+8. [x] Doe dit ook voor de _getTelevision_, _saveTelevision_, _updateTelevision_ en de _deleteTelevision_
+9. [x] Maak in de `TelevisionController` een `@Autowired` om de `Service` te kunnen gebruiken in de `Controller`
+10. [x] Maak in het project een map aan genaamd `Dtos`
+11. [x] Maak in deze map een klasse aan genaamd `TelevisionDto`
+12. [x] Defenieer in deze klasse alle variabele die een `Television` object bevat (dezelfde als in het model gedefinieerd staan)
+13. [x] Maak daaronder een `public` `static` functie aan genaamd _fromTelevision_. Deze heeft als returnwaarde `TelevisionDto` en als attribuut `Television television`
+14. [x] Maak in deze functie een `var dto = new TelevisionDto();`
+15. [x] Voeg in de functie voor iedere _variable_, die je boven deze functie hebt gedeclareerd, een toewijzing naar de dto variable (bijvoorbeeld: `dto.name = television.getName();` )
+16. [x] Return als laatste stap in deze functie, het _dto_ object en sluit de functie af
+17. [x] Maak een klasse aan in de map `Dtos` genaamd `TelevisionInputDto`
+18. [x] Defenieer ook in deze klasse alle variabelen die een `Television` object bevat
+19. [] Maak een `public` functie genaamd `toTelevision()` met returnwaarde `Television`
+20. [] Maak in deze functie een `var television = new Television();`
+21. [] Voeg in de functie voor iedere _variable_, die je boven deze functie hebt gedeclareerd, een toewijzing naar de television variable (bijvoorbeeld: `television.setName(name);` )
 22. [] Pas de `RequestMappings` in de `TelevisionController`, zodat de controller het verzoek doet aan de _servicelaag_ en het response ook ontvangt van de _servicelaag_ (dit omdat we de `Controller` eigenlijk zo dom mogelijk willen houden)
 23. [] Pas de _servicelaag_ zo aan dat deze gebruik maakt van de gegevens die de _controllerlaag_ doorgeeft, de `Service` moet hier dan de logica aan toepassen om met gebruik van de `Dtos` een _returnwaarde_ terug te kunnen sturen naar de controller
