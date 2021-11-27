@@ -36,25 +36,25 @@ public class TelevisionService {
     }
 
     public Television getTelevision(Long id) {
-        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        Optional<Television> television = televisionRepository.findById(id);
 
-        if (optionalTelevision.isPresent()) {
-            return optionalTelevision.get();
+        if (television.isPresent()) {
+            return television.get();
         } else {
             throw new RecordNotFoundException("ID not found");
         }
     }
 
-    public long addTelevision(Television television) {
+    public Television addTelevision(Television television) {
         //argument voor als tv al bestaat → name
         String tvName = television.getName();
         //haal de tv's op en controleer of ze aanwezig zijn
         List<Television> televisions = (List<Television>) televisionRepository.findAllByName(tvName);
         if (televisions.size() > 0) {
             throw new BadRequestException("TV Already exists");
+        } else {
+            return televisionRepository.save(television);
         }
-        Television newTV = televisionRepository.save(television);
-        return newTV.getId();
     }
 
     public void deleteTelevision(Long id) {

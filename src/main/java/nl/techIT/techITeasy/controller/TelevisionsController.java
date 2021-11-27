@@ -1,6 +1,7 @@
 package nl.techIT.techITeasy.controller;
 
 import nl.techIT.techITeasy.controller.dto.TelevisionDto;
+import nl.techIT.techITeasy.controller.dto.TelevisionInputDto;
 import nl.techIT.techITeasy.model.Television;
 import nl.techIT.techITeasy.service.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import java.util.List;
 
 //aangeven dat dit een controller is
 @RestController
-@RequestMapping("televisions")
 public class TelevisionsController {
 
     //Maak een link met de repository laag
@@ -33,21 +33,20 @@ public class TelevisionsController {
     }
 
     @GetMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> getTelevision(@PathVariable("id") Long id) {
-        // in de ok()komt de body te staan
-        return ResponseEntity.ok(televisionService.getTelevision(id));
+    public TelevisionDto getTelevision(@PathVariable("id") Long id) {
+        //je krijgt geen lijst maar object
+        var television = televisionService.getTelevision(id);
+        //return de DTO
+        return TelevisionDto.fromTelevision(television);
     }
 
     //Post
+    //Je wilt alles via de DTO laten lopen, parameters DTO -> input
     @PostMapping(value = "/televisions")
-    public ResponseEntity<Object> addTelevision(@RequestBody Television television) {
+    public TelevisionDto addTelevision(@RequestBody TelevisionInputDto dto) {
+        var television = televisionService.addTelevision(dto.toTelevision());
 
-        long newId = televisionService.addTelevision(television);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newId).toUri();
-
-        return ResponseEntity.created(location).build();
+        return TelevisionDto.fromTelevision(television);
     }
 
     //Delete
