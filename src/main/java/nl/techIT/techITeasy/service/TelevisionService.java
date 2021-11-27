@@ -1,5 +1,6 @@
 package nl.techIT.techITeasy.service;
 
+import nl.techIT.techITeasy.controller.dto.TelevisionDto;
 import nl.techIT.techITeasy.exceptions.BadRequestException;
 import nl.techIT.techITeasy.exceptions.RecordNotFoundException;
 import nl.techIT.techITeasy.model.Television;
@@ -7,6 +8,7 @@ import nl.techIT.techITeasy.repository.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +23,16 @@ public class TelevisionService {
         this.televisionRepository = televisionRepository;
     }
 
-    public Iterable<Television> getTelevisions(String name) {
-        if (name.isEmpty()) {
-            return televisionRepository.findAll();
-        } else {
-            return televisionRepository.findAllByNameContainingIgnoreCase(name);
+    //Services ombouwen naar ontvangsten DTO, je ontvangt niet meer het object maar de data(DTO)
+
+    public List<TelevisionDto> getAllTelevisions() {
+        var dtos = new ArrayList<TelevisionDto>();
+        var televisions = televisionRepository.findAll();
+
+        for (Television television : televisions) {
+            dtos.add(TelevisionDto.fromTelevision(television));
         }
+        return dtos;
     }
 
     public Television getTelevision(Long id) {
@@ -52,7 +58,7 @@ public class TelevisionService {
     }
 
     public void deleteTelevision(Long id) {
-        if (televisionRepository.existsById(id)){
+        if (televisionRepository.existsById(id)) {
             televisionRepository.deleteById(id);
         } else {
             throw new BadRequestException("ID not found!");
@@ -63,13 +69,12 @@ public class TelevisionService {
     public void updateTelevision(long id, Television television) {
         Optional<Television> optionalTelevision = televisionRepository.findById(id);
 
-        if (optionalTelevision.isPresent()){
+        if (optionalTelevision.isPresent()) {
             Television existingTV = optionalTelevision.get();
 
             television.setId(existingTV.getId());
             televisionRepository.save(television);
-        } else
-            throw new RecordNotFoundException("ID not found");
+        } else throw new RecordNotFoundException("ID not found");
     }
 
     public void partialUpdateTelevision(long id, Television television) {

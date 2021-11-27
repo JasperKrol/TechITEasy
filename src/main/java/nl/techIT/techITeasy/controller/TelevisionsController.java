@@ -1,5 +1,6 @@
 package nl.techIT.techITeasy.controller;
 
+import nl.techIT.techITeasy.controller.dto.TelevisionDto;
 import nl.techIT.techITeasy.model.Television;
 import nl.techIT.techITeasy.service.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 
 //aangeven dat dit een controller is
@@ -25,9 +27,9 @@ public class TelevisionsController {
 
     //Get
     @GetMapping(value = "/televisions")
-    public ResponseEntity<Object> getAllTelevisions(@RequestParam(name = "title", defaultValue = "") String title) {
-        // in de ok()komt de body te staan
-        return ResponseEntity.ok(televisionService.getTelevisions(title));
+    public List<TelevisionDto> getAllTelevisions(@RequestParam(name = "title", defaultValue = "") String title) {
+        // Response entity eruit -> alleen in dev voor status codes. Nu wil je het object
+        return televisionService.getAllTelevisions();
     }
 
     @GetMapping(value = "/televisions/{id}")
