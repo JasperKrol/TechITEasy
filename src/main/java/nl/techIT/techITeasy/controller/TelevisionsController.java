@@ -51,23 +51,22 @@ public class TelevisionsController {
 
     //Delete
     @DeleteMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> deleteTelevision(@PathVariable("id") Long id) {
+    public void deleteTelevision(@PathVariable("id") Long id) {
         televisionService.deleteTelevision(id);
-        return ResponseEntity.noContent().build();
     }
 
     //Put
     @PutMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
+    public TelevisionDto updateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
         televisionService.updateTelevision(id, television);
-        return ResponseEntity.noContent().build();
+        return TelevisionDto.fromTelevision(television);
     }
 
     //Patch
     @PatchMapping(value = "/televisions/{id}")
-    public ResponseEntity<Object> partialUpdateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
+    public TelevisionDto partialUpdateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
         televisionService.partialUpdateTelevision(id, television);
 
-        return ResponseEntity.noContent().build();
+        return TelevisionDto.fromTelevision(television);
     }
 }

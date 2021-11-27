@@ -6,15 +6,7 @@ import javax.persistence.*;
 @Table(name = "televisions")
 public class Television {
     @Id
-    @SequenceGenerator(
-            name = "television_sequence",
-            sequenceName = "television_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "television_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String type;
