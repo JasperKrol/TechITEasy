@@ -19,6 +19,7 @@ public class RemoteController {
     private Double price;
     @Column(name = "original_stock")
     private Integer originalStock;
+    private Integer sold;
 
     //Contructor not needed
     // Getters and setters
@@ -69,5 +70,13 @@ public class RemoteController {
 
     public void setOriginalStock(Integer originalStock) {
         this.originalStock = originalStock;
+    }
+
+    public Integer getSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
     }
 }

@@ -5,11 +5,8 @@ import nl.techIT.techITeasy.controller.dto.TelevisionInputDto;
 import nl.techIT.techITeasy.model.Television;
 import nl.techIT.techITeasy.service.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 
@@ -28,7 +25,7 @@ public class TelevisionsController {
     //Get
     @GetMapping(value = "/televisions")
     public List<TelevisionDto> getAllTelevisions(@RequestParam(name = "title", defaultValue = "") String title) {
-        // Response entity eruit -> alleen in dev voor status codes. Nu wil je het object
+        // Response entity eruit → alleen in dev voor status codes. Nu wil je het object
         return televisionService.getAllTelevisions();
     }
 

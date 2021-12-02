@@ -59,5 +59,6 @@ _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet z
 10. Om deze functie uit te kunnen voeren moet je in de `TelevisionController` een _PutRequest_ maken met endpoint _"/televisions/{id}/remotecontroller"_ om aan te spreken. Voeg deze toe en geef de _televisionId_ mee als _@PathVariable_ en de _remoteControllerId_ als _@RequestBody_ doormiddel van een `IdInputDto` _input_.  
 11. Hiervoor missen je nog de `IdInputDto`. Maak in het mapje `Dtos` een nieuwe klasse aan voor de `IdInputDto`. Declareer in deze dto een _public Long id_ toe, meer hoeft er niet in
 12. Gefeliciteerd, je hebt zo juist de eerste relatie gelegd in je applicatie.
-13. Alleen als je nu met een get alle `Televisions` ophaalt zien je geen `RemoteController`. Dit komt omdat we in de `TelevisionDto` nog niks hebben verteld over de `RemoteController`.De makkelijkste manier om hier de connectie te leggen is de `public RemoteControllerDto remoteController;` toe te voegen aan de variable van de `TelevisionDto` 
+13. Alleen als je nu met een get alle `Televisions` ophaalt zien je geen `RemoteController`. Dit komt omdat we in de `TelevisionDto` nog niks hebben verteld over de `RemoteController`. 
+De makkelijkste manier om hier de connectie te leggen is de `public RemoteControllerDto remoteController;` toe te voegen aan de variable van de `TelevisionDto` 
 14. Test alle functies voor je applicatie zover met postman.
