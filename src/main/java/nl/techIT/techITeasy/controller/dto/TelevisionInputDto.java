@@ -25,6 +25,7 @@ public class TelevisionInputDto {
     public Integer sold;
 
     //Methods
+    // hier instantieer je het object en zet je de waardes
     public Television toTelevision() {
         var television = new Television();
         television.setId(id);

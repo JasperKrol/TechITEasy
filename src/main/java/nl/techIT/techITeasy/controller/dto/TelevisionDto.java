@@ -1,6 +1,5 @@
 package nl.techIT.techITeasy.controller.dto;
 
-import com.sun.istack.NotNull;
 import nl.techIT.techITeasy.model.Television;
 
 public class TelevisionDto {

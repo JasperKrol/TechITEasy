@@ -9,49 +9,43 @@ public class Television {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column
     private String type;
+    @Column
     private String brand;
+    @Column
     private String name;
+    @Column
     private Double price;
+    @Column(name = "available_size")
     private Double availableSize;
+    @Column(name = "refresh_rate")
     private Double refreshRate;
+    @Column(name = "screen_type")
     private String screenType;
+    @Column(name = "screen_quality")
     private String screenQuality;
+    @Column(name = "smart_tv")
     private Boolean smartTv;
+    @Column
     private Boolean wifi;
+    @Column(name = "voice_control")
     private Boolean voiceControl;
+    @Column
     private Boolean hdr;
+    @Column
     private Boolean bluetooth;
+    @Column(name = "ambi_light")
     private Boolean ambiLight;
+    @Column(name = "original_stock")
     private Integer originalStock;
+    @Column
     private Integer sold;
 
-    // Een default constructor
-    public Television() {
-    }
+    // Een default constructor is niet nodig -> SB maakt deze zelf
 
-    // Een constructor met alle gevraagde variable
-    public Television(Long id, String type, String brand, String name, Double price, Double availableSize, Double refreshRate, String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bluetooth, Boolean ambiLight, Integer originalStock, Integer sold) {
-        this.id = id;
-        this.type = type;
-        this.brand = brand;
-        this.name = name;
-        this.price = price;
-        this.availableSize = availableSize;
-        this.refreshRate = refreshRate;
-        this.screenType = screenType;
-        this.screenQuality = screenQuality;
-        this.smartTv = smartTv;
-        this.wifi = wifi;
-        this.voiceControl = voiceControl;
-        this.hdr = hdr;
-        this.bluetooth = bluetooth;
-        this.ambiLight = ambiLight;
-        this.originalStock = originalStock;
-        this.sold = sold;
-    }
+    // Getters and setters
 
-    // A
     public Long getId() {
         return id;
     }
