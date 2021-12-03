@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class WallBracket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String size;
     private Boolean adjustable;

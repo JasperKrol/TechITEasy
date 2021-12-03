@@ -3,11 +3,11 @@ package nl.techIT.techITeasy.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CI_modules")
+@Table(name = "ci_modules")
 public class CIModule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String type;

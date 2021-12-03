@@ -15,3 +15,8 @@ INSERT INTO remote_controllers(compatible_with, battery_type, brand, price, orig
 VALUES ('Philips', 'AAA', 'Philips', 19, 10, 5),
        ('LG', 'AAA', 'LG', 12, 12, 12),
        ('Sony', 'AAA', 'Sony', 22, 22, 10);
+
+INSERT INTO ci_modules (name,type,price)
+VALUES ('module one', 'one', 15),
+       ('module two', 'one', 11),
+       ('module three', 'one', 14);

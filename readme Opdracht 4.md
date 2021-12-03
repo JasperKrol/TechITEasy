@@ -11,8 +11,8 @@ Je hebt inmiddels je applicatie draaiend gekregen, dit geeft je de mogelijkheid 
 ## Randvoorwaarden
 
 - Het project bevat de volgende `Models`:
-  - `Television`
-  - `RemoteController` met de _variables_: 
+  x`Television`
+  x`RemoteController` met de _variables_: 
     -_Long_`id`
     -_String_`compatibleWith`
     -_String_`batteryType`
@@ -20,12 +20,12 @@ Je hebt inmiddels je applicatie draaiend gekregen, dit geeft je de mogelijkheid 
     -_String_`brand`
     -_Double_ `price`
     -_Integer_ `originalStock`
-  - `CI-Module` met de _variables_:
+  x`CI-Module` met de _variables_:
     -_Long_ `id`
     -_String_ `name`
     -_String_ `type`
     -_Double_ `price`
-  - `WallBracket` met de _variables_:
+  x`WallBracket` met de _variables_:
     -_Long_ `id`
     -_String_ `size`
     -_Boolean_ `ajustable`
@@ -43,9 +43,9 @@ Als zelfs de _one to many_ redelijk eenvoudig is voor je mag je een _many to man
 
 ## Stappenplan
 _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet zo goed weten waar je moet beginnen, kun je onderstaand stappenplan volgen:
-1. Maak in de map `Models` _klasse_ aan voor `RemoteController`, `CI-Module` en `WallBracket` (voeg de juiste _annotatie_, _variables_, _getters&setters_ en _constructors_ toe)
-2. Maak in de map `Repositories` voor elk model een `Repository` aan (die elk de `JpaRepository` _extends_)
-3. Maak in de map `Controllers` voor elk model een `Controller` aan (met juiste _annotatie_, _@Autowired_ en _requestMappings_)
+1. Maak in de map `Models` _klasse_ aan voor `[x]RemoteController`, [x]`CI-Module` en [x]`WallBracket` (voeg de juiste _annotatie_, _variables_, _getters&setters_ en _constructors_ toe)
+2. Maak in de map [x]`Repositories` voor elk model een `Repository` aan (die elk de `JpaRepository` _extends_)
+3. Maak in de map [x]`Controllers` voor elk model een [x]`Controller` aan (met juiste _annotatie_, _@Autowired_ en _requestMappings_)
 4. Maak in de map `Dtos` voor elk model een `Dto` en `InputDto` aan (met juiste _variables_ en toewijzingen)
 5. Maak in de map `Services` voor elk model een `Service` aan (met juiste _annotatie_, _@Autowired_ en _functions_)
 6. Leg een OneToOne relatie tussen `Television` en `RemoteController` door in beide _models_ _@OneToOne_ toe te voegen, gevolgd door het model waar de relatie mee ligt in de vorm van `Model` `object` (bijvoorbeeld `Television` `television`) op de volgende regel
