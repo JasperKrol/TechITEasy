@@ -1,7 +1,8 @@
 package nl.techIT.techITeasy.controller;
 
+import nl.techIT.techITeasy.controller.dto.CIModuleDto;
+import nl.techIT.techITeasy.controller.dto.CIModuleInputDto;
 import nl.techIT.techITeasy.model.CIModule;
-import nl.techIT.techITeasy.model.RemoteController;
 import nl.techIT.techITeasy.service.CIModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CIModuleController {
@@ -19,39 +22,43 @@ public class CIModuleController {
     //Requests
     //Get all
     @GetMapping(value = "/ci_modules")
-   public ResponseEntity<Object> getAllCIModules(){
-        return ResponseEntity.ok(ciModuleService.getAllCIModules());
+    public List<CIModuleDto> getAllCIModules() {
+        // haal alle dto att op
+        var dtos = new ArrayList<CIModuleDto>();
+        var ciModules = ciModuleService.getAllCIModules();
+
+        //Haal alle cimodules
+        for (CIModule cimodule : ciModules) {
+            //stop de dto info fromcimodule uit object cimodule
+            dtos.add(CIModuleDto.fromCIModule(cimodule));
+        }
+        return dtos;
     }
 
     //Get one
     @GetMapping(value = "/ci_modules/{id}")
-    public ResponseEntity<Object> getOneModule(@PathVariable("id") long id){
-        return ResponseEntity.ok(ciModuleService.getOneModule(id));
+    public CIModuleDto getOneModule(@PathVariable("id") long id) {
+        var ciModule = ciModuleService.getOneModule(id);
+        return CIModuleDto.fromCIModule(ciModule);
     }
-
 
     //Post
     @PostMapping(value = "/ci_modules")
-    public ResponseEntity<Object> createCiModule(@RequestBody CIModule ciModule) {
-        long newID = ciModuleService.createCiModule(ciModule);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newID).toUri();
+    public CIModuleDto createCiModule(@RequestBody CIModuleInputDto dto) {
+        var ciModule = ciModuleService.createCiModule(dto.toCIModule());
+        return CIModuleDto.fromCIModule(ciModule);
+    }
 
-        return ResponseEntity.created(location).build();
+    //Delete
+    @DeleteMapping(value = "/ci_modules/{id}")
+    public void deleteCiModule(@PathVariable("id") Long id) {
+        ciModuleService.deleteCiModule(id);
     }
 
     //Update
     @PutMapping(value = "/ci_modules/{id}")
-    public ResponseEntity<Object> updateCiModule(@PathVariable("id") Long id, @RequestBody CIModule ciModule){
+    public CIModuleDto updateCiModule(@PathVariable("id") Long id, @RequestBody CIModule ciModule) {
         ciModuleService.updateCiModule(id, ciModule);
-        return ResponseEntity.noContent().build();
+        return CIModuleDto.fromCIModule(ciModule);
     }
-
-
-    //Delete
-    @DeleteMapping(value = "/ci_modules/{id}")
-    public ResponseEntity<Object> deleteCiModule(@PathVariable("id") Long id){
-        ciModuleService.deleteCiModule(id);
-        return ResponseEntity.noContent().build();
-    }
-
 }

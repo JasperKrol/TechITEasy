@@ -46,7 +46,7 @@ _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet z
 1. Maak in de map `Models` _klasse_ aan voor `[x]RemoteController`, [x]`CI-Module` en [x]`WallBracket` (voeg de juiste _annotatie_, _variables_, _getters&setters_ en _constructors_ toe)
 2. Maak in de map [x]`Repositories` voor elk model een `Repository` aan (die elk de `JpaRepository` _extends_)
 3. Maak in de map [x]`Controllers` voor elk model een [x]`Controller` aan (met juiste _annotatie_, _@Autowired_ en _requestMappings_)
-4. Maak in de map `Dtos` voor elk model een `Dto` en `InputDto` aan (met juiste _variables_ en toewijzingen)
+4. [x] Maak in de map `Dtos` voor elk model een `Dto` en `InputDto` aan (met juiste _variables_ en toewijzingen)
 5. Maak in de map `Services` voor elk model een `Service` aan (met juiste _annotatie_, _@Autowired_ en _functions_)
 6. Leg een OneToOne relatie tussen `Television` en `RemoteController` door in beide _models_ _@OneToOne_ toe te voegen, gevolgd door het model waar de relatie mee ligt in de vorm van `Model` `object` (bijvoorbeeld `Television` `television`) op de volgende regel
 7. Een OneToOne relatie heeft een eigenaar van de relatie nodig, maak de `Television` eigenaar door in `RemoteController` achter de _@OneToOne_ _mappedBy_ toe te voegen op deze manier _@OneToOne(mappedBy = "remotecontroller"). Dit zorgt er voor dat in de `Television` tabel een kolom toegevoegd met de naam `remotecontroller_id`. Vergeet niet de getter en setter toe te voegen na het leggen van de relatie in de modellen

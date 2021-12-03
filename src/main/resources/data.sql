@@ -20,3 +20,8 @@ INSERT INTO ci_modules (name,type,price)
 VALUES ('module one', 'one', 15),
        ('module two', 'one', 11),
        ('module three', 'one', 14);
+
+INSERT INTO wall_brackets(size, adjustable, name, price)
+VALUES ('10cm', true, 'hangman', 50 ),
+       ('40cm', false , 'klik direct', 30 ),
+       ('24', true, 'hangman', 50 );
