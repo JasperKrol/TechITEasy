@@ -11,10 +11,10 @@ VALUES (1, 'NH3216SMART', 'Nikkei', 'HD smart TV', 159.00, 32.00, 100.00, 'LED',
        (5, 'OLED55C16LA', 'LG', 'LG OLED55C16LA', 989.00, 55.00, 100.00, 'OLED', 'ULTRA HD', true, true, true, true,
         true, false, 10, 4);
 
-INSERT INTO remote_controllers(compatible_with, battery_type, brand, price, original_stock, sold)
-VALUES ('Philips', 'AAA', 'Philips', 19, 10, 5),
-       ('LG', 'AAA', 'LG', 12, 12, 12),
-       ('Sony', 'AAA', 'Sony', 22, 22, 10);
+INSERT INTO remote_controllers(compatible_with, battery_type, brand, name ,price, original_stock, sold)
+VALUES ('Philips', 'AAA', 'Philips', 'controller pro',19, 10, 5),
+       ('LG', 'AAA', 'LG', 'controller expert',12, 12, 12),
+       ('Sony', 'AAA', 'Sony', 'controller basis',10, 22, 10);
 
 INSERT INTO ci_modules (name,type,price)
 VALUES ('module one', 'one', 15),

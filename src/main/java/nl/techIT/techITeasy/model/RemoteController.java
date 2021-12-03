@@ -16,6 +16,7 @@ public class RemoteController {
     @Column(name = "battery_type")
     private String batteryType;
     private String brand;
+    private String name;
     private Double price;
     @Column(name = "original_stock")
     private Integer originalStock;
@@ -50,6 +51,14 @@ public class RemoteController {
 
     public String getBrand() {
         return brand;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setBrand(String brand) {

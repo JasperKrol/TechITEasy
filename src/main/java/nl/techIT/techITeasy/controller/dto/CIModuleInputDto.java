@@ -11,6 +11,7 @@ public class CIModuleInputDto {
     //Je wilt de CI module model aanmaken en naar je dto vormen, dus instantieer en set
     public CIModule toCIModule(){
         var ciModule = new CIModule();
+
         ciModule.setId(id);
         ciModule.setName(name);
         ciModule.setType(type);

@@ -1,5 +1,7 @@
 package nl.techIT.techITeasy.controller;
 
+import nl.techIT.techITeasy.controller.dto.RemoteControllerDto;
+import nl.techIT.techITeasy.controller.dto.RemoteControllerInputDto;
 import nl.techIT.techITeasy.model.RemoteController;
 import nl.techIT.techITeasy.service.RemoteControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class RemoteControllerController {
@@ -19,38 +23,43 @@ public class RemoteControllerController {
     //Requests
     //Get all
     @GetMapping(value = "/remote_controllers")
-    public ResponseEntity<Object> getAllRemoteControllers(@RequestParam(name = "brand", defaultValue = "") String brand) {
-        return ResponseEntity.ok(remoteControllerService.getAllRemoteControllers());
+    public List<RemoteControllerDto> getAllRemoteControllers(@RequestParam(name = "brand", defaultValue = "") String brand) {
+        var dtos = new ArrayList<RemoteControllerDto>();
+        var remoteControllers = remoteControllerService.getAllRemoteControllers();
+
+        for (RemoteController remoteController : remoteControllers) {
+            dtos.add(RemoteControllerDto.fromRemoteController(remoteController));
+        }
+        return dtos;
     }
 
     //Get one
     @GetMapping(value = "/remote_controllers/{id}")
-    public ResponseEntity<Object> getRemoteController(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(remoteControllerService.getRemoteController(id));
+    public RemoteControllerDto getRemoteController(@PathVariable("id") Long id) {
+        var remoteController = remoteControllerService.getRemoteController(id);
+        return RemoteControllerDto.fromRemoteController(remoteController);
     }
 
     //Post
     @PostMapping(value = "/remote_controllers")
-    public ResponseEntity<Object> createRemoteController(@RequestBody RemoteController remoteController) {
-        long newID = remoteControllerService.createRemoteController(remoteController);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newID).toUri();
-
-        return ResponseEntity.created(location).build();
-    }
-
-    //Update
-    @PutMapping(value = "/remote_controllers/{id}")
-    public ResponseEntity<Object> updateRemoteController(@PathVariable("id") Long id, @RequestBody RemoteController remoteController){
-        remoteControllerService.updateRemoteController(id,remoteController);
-        return ResponseEntity.noContent().build();
+    // Je stuurt de DTO, maar in de body komt de inputDTO dto voor de functies om de DTO te maken
+    // service.createcontroller(dto.toRemote) om hem te vullen en aan te kunnen spreken
+    public RemoteControllerDto createRemoteController(@RequestBody RemoteControllerInputDto dto) {
+        var remoteController = remoteControllerService.createRemoteController(dto.toRemoteController());
+        return RemoteControllerDto.fromRemoteController(remoteController);
     }
 
     //Delete
     @DeleteMapping(value = "/remote_controllers/{id}")
-    public ResponseEntity<Object> deleteRemoteController(@PathVariable("id") long id) {
+    public void deleteRemoteController(@PathVariable("id") long id) {
         remoteControllerService.deleteRemoteController(id);
-        return ResponseEntity.noContent().build();
     }
 
+    //Update
+    @PutMapping(value = "/remote_controllers/{id}")
+    public RemoteControllerDto updateRemoteController(@PathVariable("id") Long id, @RequestBody RemoteController remoteController) {
+        remoteControllerService.updateRemoteController(id, remoteController);
+        return RemoteControllerDto.fromRemoteController(remoteController);
+    }
 
 }

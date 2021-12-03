@@ -13,6 +13,7 @@ public class CIModuleDto {
     //Je wilt de attributen uit het model naar je dto vormen en halen, dus get
     public static CIModuleDto fromCIModule(CIModule ciModule){
         var dto = new CIModuleDto();
+        dto.id = ciModule.getId();
         dto.name = ciModule.getName();
         dto.type = ciModule.getType();
         dto.price = ciModule.getPrice();

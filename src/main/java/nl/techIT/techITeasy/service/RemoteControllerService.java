@@ -16,33 +16,34 @@ public class RemoteControllerService {
     @Autowired
     private RemoteControllerRepository remoteControllerRepository;
 
-    public Iterable<RemoteController> getAllRemoteControllers() {
+    public List<RemoteController> getAllRemoteControllers() {
         return remoteControllerRepository.findAll();
     }
 
-    public Object getRemoteController(Long id) {
+    public RemoteController getRemoteController(Long id) {
         Optional<RemoteController> optionalRemoteController = remoteControllerRepository.findById(id);
 
-        if (optionalRemoteController.isPresent()){
+        if (optionalRemoteController.isPresent()) {
             return optionalRemoteController.get();
         } else {
             throw new RecordNotFoundException("ID for remote not found");
         }
     }
 
-    public Long createRemoteController(RemoteController remoteController) {
+    public RemoteController createRemoteController(RemoteController remoteController) {
         String brand = remoteController.getBrand();
         List<RemoteController> controllers = (List<RemoteController>) remoteControllerRepository.findAllByBrand(brand);
-        if (controllers.size() >0){
+        if (controllers.size() > 0) {
             throw new BadRequestException("Already in stock");
+        } else {
+            RemoteController newRemoteController = remoteControllerRepository.save(remoteController);
+            return newRemoteController;
         }
-        RemoteController newRemoteController = remoteControllerRepository.save(remoteController);
-        return newRemoteController.getId();
     }
 
     public void updateRemoteController(Long id, RemoteController remoteController) {
         Optional<RemoteController> optionalRemoteController = remoteControllerRepository.findById(id);
-        if (optionalRemoteController.isPresent()){
+        if (optionalRemoteController.isPresent()) {
             RemoteController existingRemote = optionalRemoteController.get();
             existingRemote.setCompatibleWith(existingRemote.getCompatibleWith());
             existingRemote.setBatteryType(existingRemote.getBatteryType());
@@ -57,9 +58,9 @@ public class RemoteControllerService {
     }
 
     public void deleteRemoteController(long id) {
-        if (remoteControllerRepository.existsById(id)){
+        if (remoteControllerRepository.existsById(id)) {
             remoteControllerRepository.deleteById(id);
-        }else {
+        } else {
             throw new BadRequestException("Remote with ID not found");
         }
     }

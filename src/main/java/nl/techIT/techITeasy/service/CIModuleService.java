@@ -16,20 +16,20 @@ public class CIModuleService {
     private CIModuleRepository ciModuleRepository;
 
     //Methods
-    public Iterable<CIModule> getAllCIModules() {
+    public List<CIModule> getAllCIModules() {
         return ciModuleRepository.findAll();
     }
 
-    public Object getOneModule(long id) {
+    public CIModule getOneModule(long id) {
         Optional<CIModule> optionalCIModule = ciModuleRepository.findById(id);
         if (optionalCIModule.isPresent()) {
             return optionalCIModule.get();
         } else {
-            throw new BadRequestException("CI-Module with id not found");
+            throw new RecordNotFoundException("CI-Module with id not found");
         }
     }
 
-    public long createCiModule(CIModule ciModule) {
+    public CIModule createCiModule(CIModule ciModule) {
         String name = ciModule.getName();
         List<CIModule> ciModules = (List<CIModule>) ciModuleRepository.findAllByName(name);
 
@@ -37,19 +37,7 @@ public class CIModuleService {
             throw new BadRequestException("Module with identical name exists");
         } else {
             CIModule newCiModule = ciModuleRepository.save(ciModule);
-            return newCiModule.getId();
-        }
-    }
-
-    public void updateCiModule(Long id, CIModule ciModule) {
-        if (ciModuleRepository.existsById(id)) {
-            CIModule storedCiModule = ciModuleRepository.findById(id).orElse(null);
-            storedCiModule.setName(storedCiModule.getName());
-            storedCiModule.setType(storedCiModule.getType());
-            storedCiModule.setPrice(storedCiModule.getPrice());
-            ciModuleRepository.save(storedCiModule);
-        } else {
-            throw new RecordNotFoundException("Module with ID not found");
+            return newCiModule;
         }
     }
 
@@ -58,6 +46,19 @@ public class CIModuleService {
             ciModuleRepository.deleteById(id);
         } else {
             throw new BadRequestException("Remote with ID not found");
+        }
+    }
+
+    public void updateCiModule(Long id, CIModule ciModule) {
+        if (ciModuleRepository.existsById(id)) {
+            CIModule storedCiModule = ciModuleRepository.findById(id).orElse(null);
+            storedCiModule.setName(ciModule.getName());
+            storedCiModule.setId(ciModule.getId());
+            storedCiModule.setType(ciModule.getType());
+            storedCiModule.setPrice(ciModule.getPrice());
+            ciModuleRepository.save(storedCiModule);
+        } else {
+            throw new RecordNotFoundException("Module with ID not found");
         }
     }
 }
