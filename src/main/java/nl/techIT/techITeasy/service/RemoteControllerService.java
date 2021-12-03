@@ -42,15 +42,15 @@ public class RemoteControllerService {
     }
 
     public void updateRemoteController(Long id, RemoteController remoteController) {
-        Optional<RemoteController> optionalRemoteController = remoteControllerRepository.findById(id);
-        if (optionalRemoteController.isPresent()) {
-            RemoteController existingRemote = optionalRemoteController.get();
-            existingRemote.setCompatibleWith(existingRemote.getCompatibleWith());
-            existingRemote.setBatteryType(existingRemote.getBatteryType());
-            existingRemote.setBrand(existingRemote.getBrand());
-            existingRemote.setPrice(existingRemote.getPrice());
-            existingRemote.setOriginalStock(existingRemote.getOriginalStock());
-            existingRemote.setSold(existingRemote.getSold());
+        if (!remoteControllerRepository.existsById(id)) {
+            RemoteController existingRemote = remoteControllerRepository.findById(id).orElse(null);
+            existingRemote.setCompatibleWith(remoteController.getCompatibleWith());
+            existingRemote.setBatteryType(remoteController.getBatteryType());
+            existingRemote.setBrand(remoteController.getBrand());
+            existingRemote.setName(remoteController.getName());
+            existingRemote.setPrice(remoteController.getPrice());
+            existingRemote.setOriginalStock(remoteController.getOriginalStock());
+            existingRemote.setSold(remoteController.getSold());
             remoteControllerRepository.save(existingRemote);
         } else {
             throw new RecordNotFoundException("Remote with ID not found");
