@@ -21,7 +21,7 @@ public class WallBracketService {
         String name = wallBracket.getName();
 
         List<WallBracket> wallBrackets = (List<WallBracket>) wallBracketRepository.findAllByName(name);
-        if (wallBrackets.size() > 0){
+        if (wallBrackets.size() > 0) {
             throw new BadRequestException("Wall bracket with name already exists");
         }
 
@@ -35,10 +35,32 @@ public class WallBracketService {
 
     public WallBracket getOneWallBracket(Long id) {
         Optional existingWallBracket = wallBracketRepository.findById(id);
-        if (existingWallBracket.isPresent()){
-           return wallBracketRepository.getById(id);
+        if (existingWallBracket.isPresent()) {
+            return wallBracketRepository.getById(id);
         } else {
             throw new RecordNotFoundException("ID for wall bracket not found");
+        }
+    }
+
+    public void deleteWallBracket(Long id) {
+        if (wallBracketRepository.existsById(id)) {
+            wallBracketRepository.deleteById(id);
+        } else {
+            throw new RecordNotFoundException("ID for wall bracket not found");
+        }
+    }
+
+    public void updateWallBracket(Long id, WallBracket wallBracket) {
+        if (!wallBracketRepository.existsById(id)) {
+            throw new RecordNotFoundException("ID for wall bracket not found");
+        } else {
+            WallBracket storedWallBracket = wallBracketRepository.findById(id).orElse(null);
+            storedWallBracket.setName(wallBracket.getName());
+            storedWallBracket.setPrice(wallBracket.getPrice());
+            storedWallBracket.setAdjustable(wallBracket.getAdjustable());
+            storedWallBracket.setSize(wallBracket.getSize());
+
+            wallBracketRepository.save(storedWallBracket);
         }
     }
 }

@@ -37,4 +37,18 @@ public class WallBracketController {
         return ResponseEntity.created(location).build();
     }
 
+    //Delete
+    @DeleteMapping(value = "/wall_brackets/{id}")
+    public ResponseEntity<Object> deleteWallBracket(@PathVariable("id") Long id) {
+        wallBracketService.deleteWallBracket(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    //Update
+    @PutMapping(value = "/wall_brackets/{id}")
+    public ResponseEntity<Object> updateWallBracket(@PathVariable("id") Long id, @RequestBody WallBracket wallBracket){
+        wallBracketService.updateWallBracket(id, wallBracket);
+        return ResponseEntity.ok().build();
+    }
+
 }

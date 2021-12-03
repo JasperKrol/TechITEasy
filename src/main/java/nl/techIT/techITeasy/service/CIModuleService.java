@@ -41,22 +41,22 @@ public class CIModuleService {
         }
     }
 
-
     public void updateCiModule(Long id, CIModule ciModule) {
-        Optional<CIModule> optionalCIModule = ciModuleRepository.findById(id);
-        if (optionalCIModule.isPresent()) {
-            CIModule storedCiModule = optionalCIModule.get();
-            ciModule.setId(storedCiModule.getId());
-            ciModuleRepository.save(ciModule);
+        if (ciModuleRepository.existsById(id)) {
+            CIModule storedCiModule = ciModuleRepository.findById(id).orElse(null);
+            storedCiModule.setName(storedCiModule.getName());
+            storedCiModule.setType(storedCiModule.getType());
+            storedCiModule.setPrice(storedCiModule.getPrice());
+            ciModuleRepository.save(storedCiModule);
         } else {
             throw new RecordNotFoundException("Module with ID not found");
         }
     }
 
     public void deleteCiModule(Long id) {
-        if (ciModuleRepository.existsById(id)){
+        if (ciModuleRepository.existsById(id)) {
             ciModuleRepository.deleteById(id);
-        }else {
+        } else {
             throw new BadRequestException("Remote with ID not found");
         }
     }
