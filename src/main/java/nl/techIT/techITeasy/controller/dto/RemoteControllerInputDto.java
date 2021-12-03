@@ -10,6 +10,7 @@ public class RemoteControllerInputDto {
     public String brand;
     public Double price;
     public Integer originalStock;
+    public Integer sold;
 
     public RemoteController toRemoteController() {
 
@@ -22,6 +23,7 @@ public class RemoteControllerInputDto {
         remoteController.setBrand(brand);
         remoteController.setPrice(price);
         remoteController.setOriginalStock(originalStock);
+        remoteController.setSold(sold);
 
         return remoteController;
     }

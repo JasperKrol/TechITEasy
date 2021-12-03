@@ -36,25 +36,25 @@ public class RemoteControllerService {
         if (controllers.size() > 0) {
             throw new BadRequestException("Already in stock");
         } else {
-            RemoteController newRemoteController = remoteControllerRepository.save(remoteController);
-            return newRemoteController;
+            return remoteControllerRepository.save(remoteController);
         }
     }
 
     public void updateRemoteController(Long id, RemoteController remoteController) {
-        if (!remoteControllerRepository.existsById(id)) {
-            RemoteController existingRemote = remoteControllerRepository.findById(id).orElse(null);
-            existingRemote.setCompatibleWith(remoteController.getCompatibleWith());
-            existingRemote.setBatteryType(remoteController.getBatteryType());
-            existingRemote.setBrand(remoteController.getBrand());
-            existingRemote.setName(remoteController.getName());
-            existingRemote.setPrice(remoteController.getPrice());
-            existingRemote.setOriginalStock(remoteController.getOriginalStock());
-            existingRemote.setSold(remoteController.getSold());
-            remoteControllerRepository.save(existingRemote);
-        } else {
-            throw new RecordNotFoundException("Remote with ID not found");
+        if(!remoteControllerRepository.existsById(id)) {
+            throw new RecordNotFoundException("Cannot find remote controller with that id");
         }
+        RemoteController existingRemote = remoteControllerRepository.findById(id).orElse(null);
+        existingRemote.setId(remoteController.getId());
+        existingRemote.setCompatibleWith(remoteController.getCompatibleWith());
+        existingRemote.setBatteryType(remoteController.getBatteryType());
+        existingRemote.setName(remoteController.getName());
+        existingRemote.setPrice(remoteController.getPrice());
+        existingRemote.setBrand(remoteController.getBrand());
+        existingRemote.setOriginalStock(remoteController.getOriginalStock());
+        existingRemote.setSold(remoteController.getSold());
+
+        remoteControllerRepository.save(existingRemote);
     }
 
     public void deleteRemoteController(long id) {

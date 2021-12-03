@@ -10,6 +10,7 @@ public class RemoteControllerDto {
     public String brand;
     public Double price;
     public Integer originalStock;
+    public Integer sold;
 
     public static RemoteControllerDto fromRemoteController(RemoteController remoteController){
         var dto = new RemoteControllerDto();
@@ -21,6 +22,7 @@ public class RemoteControllerDto {
         dto.brand = remoteController.getBrand();
         dto.price = remoteController.getPrice();
         dto.originalStock = remoteController.getOriginalStock();
+        dto.sold = remoteController.getSold();
 
         return dto;
     }
