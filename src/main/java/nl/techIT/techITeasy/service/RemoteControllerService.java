@@ -40,12 +40,12 @@ public class RemoteControllerService {
         }
     }
 
-    public void updateRemoteController(Long id, RemoteController remoteController) {
+    public RemoteController updateRemoteController(Long id, RemoteController remoteController) {
         if(!remoteControllerRepository.existsById(id)) {
             throw new RecordNotFoundException("Cannot find remote controller with that id");
         }
         RemoteController existingRemote = remoteControllerRepository.findById(id).orElse(null);
-        existingRemote.setId(remoteController.getId());
+        existingRemote.setId(existingRemote.getId());
         existingRemote.setCompatibleWith(remoteController.getCompatibleWith());
         existingRemote.setBatteryType(remoteController.getBatteryType());
         existingRemote.setName(remoteController.getName());
@@ -55,6 +55,8 @@ public class RemoteControllerService {
         existingRemote.setSold(remoteController.getSold());
 
         remoteControllerRepository.save(existingRemote);
+
+        return existingRemote;
     }
 
     public void deleteRemoteController(long id) {

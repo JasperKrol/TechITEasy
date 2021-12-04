@@ -55,7 +55,7 @@ public class RemoteControllerController {
     //Update
     @PutMapping(value = "/remote_controllers/{id}")
     public RemoteControllerDto updateRemoteController(@PathVariable("id") Long id, @RequestBody RemoteController remoteController) {
-        remoteControllerService.updateRemoteController(id, remoteController);
-        return RemoteControllerDto.fromRemoteController(remoteController);
+        var existingRemoteController =  remoteControllerService.updateRemoteController(id, remoteController);
+        return RemoteControllerDto.fromRemoteController(existingRemoteController);
     }
 }

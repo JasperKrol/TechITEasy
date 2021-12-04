@@ -49,16 +49,19 @@ public class CIModuleService {
         }
     }
 
-    public void updateCiModule(Long id, CIModule ciModule) {
-        if (ciModuleRepository.existsById(id)) {
-            CIModule storedCiModule = ciModuleRepository.findById(id).orElse(null);
-            storedCiModule.setName(ciModule.getName());
-            storedCiModule.setId(ciModule.getId());
-            storedCiModule.setType(ciModule.getType());
-            storedCiModule.setPrice(ciModule.getPrice());
-            ciModuleRepository.save(storedCiModule);
-        } else {
+    public CIModule updateCiModule(Long id, CIModule ciModule) {
+        if (!ciModuleRepository.existsById(id)) {
             throw new RecordNotFoundException("Module with ID not found");
+
+        } else {
+            CIModule existingCIModule = ciModuleRepository.findById(id).orElse(null);
+            existingCIModule.setId(existingCIModule.getId());
+            existingCIModule.setName(ciModule.getName());
+            existingCIModule.setType(ciModule.getType());
+            existingCIModule.setPrice(ciModule.getPrice());
+
+            ciModuleRepository.save(existingCIModule);
+            return existingCIModule;
         }
     }
 }

@@ -56,7 +56,7 @@ public class CIModuleController {
     //Update
     @PutMapping(value = "/ci_modules/{id}")
     public CIModuleDto updateCiModule(@PathVariable("id") Long id, @RequestBody CIModule ciModule) {
-        ciModuleService.updateCiModule(id, ciModule);
-        return CIModuleDto.fromCIModule(ciModule);
+        var existingCIModule = ciModuleService.updateCiModule(id, ciModule);
+        return CIModuleDto.fromCIModule(existingCIModule);
     }
 }
