@@ -16,30 +16,27 @@ public class WallBracketService {
     @Autowired
     private WallBracketRepository wallBracketRepository;
 
+    public List<WallBracket> getAllWallBrackets() {
+        return wallBracketRepository.findAll();
+    }
 
-    public long addWallBracket(WallBracket wallBracket) {
+    public WallBracket getOneWallBracket(Long id) {
+        Optional<WallBracket> optionalWallBracket = wallBracketRepository.findById(id);
+        if (optionalWallBracket.isPresent()) {
+            return wallBracketRepository.getById(id);
+        } else {
+            throw new RecordNotFoundException("ID for wall bracket not found");
+        }
+    }
+
+    public WallBracket addWallBracket(WallBracket wallBracket) {
         String name = wallBracket.getName();
 
         List<WallBracket> wallBrackets = (List<WallBracket>) wallBracketRepository.findAllByName(name);
         if (wallBrackets.size() > 0) {
             throw new BadRequestException("Wall bracket with name already exists");
         }
-
-        WallBracket newWallBracket = wallBracketRepository.save(wallBracket);
-        return newWallBracket.getId();
-    }
-
-    public Iterable<WallBracket> getAllWallBrackets() {
-        return wallBracketRepository.findAll();
-    }
-
-    public WallBracket getOneWallBracket(Long id) {
-        Optional existingWallBracket = wallBracketRepository.findById(id);
-        if (existingWallBracket.isPresent()) {
-            return wallBracketRepository.getById(id);
-        } else {
-            throw new RecordNotFoundException("ID for wall bracket not found");
-        }
+        return wallBracketRepository.save(wallBracket);
     }
 
     public void deleteWallBracket(Long id) {
@@ -50,17 +47,19 @@ public class WallBracketService {
         }
     }
 
-    public void updateWallBracket(Long id, WallBracket wallBracket) {
+    public WallBracket updateWallBracket(Long id, WallBracket wallBracket) {
         if (!wallBracketRepository.existsById(id)) {
             throw new RecordNotFoundException("ID for wall bracket not found");
         } else {
             WallBracket storedWallBracket = wallBracketRepository.findById(id).orElse(null);
+            storedWallBracket.setId(storedWallBracket.getId());
             storedWallBracket.setName(wallBracket.getName());
             storedWallBracket.setPrice(wallBracket.getPrice());
             storedWallBracket.setAdjustable(wallBracket.getAdjustable());
             storedWallBracket.setSize(wallBracket.getSize());
 
             wallBracketRepository.save(storedWallBracket);
+            return storedWallBracket;
         }
     }
 }

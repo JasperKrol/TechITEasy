@@ -66,11 +66,12 @@ public class TelevisionService {
 
     }
 
-    public void updateTelevision(long id, Television television) {
+    public Television updateTelevision(long id, Television television) {
         if (!televisionRepository.existsById(id)){
             throw new RecordNotFoundException("Television not found");
         } else {
             Television storedTelevision = televisionRepository.findById(id).orElse(null);
+            storedTelevision.setId(storedTelevision.getId());
             storedTelevision.setAmbiLight(television.getAmbiLight());
             storedTelevision.setAvailableSize(television.getAvailableSize());
             storedTelevision.setBluetooth(television.getBluetooth());
@@ -89,28 +90,8 @@ public class TelevisionService {
             storedTelevision.setVoiceControl(television.getVoiceControl());
             storedTelevision.setWifi(television.getWifi());
             televisionRepository.save(storedTelevision);
+
+            return storedTelevision;
         }
     }
-
-    // TODO: 27-11-2021 Patch update tv
-//    public void partialUpdateTelevision(long id, Television television) {
-//        Optional<Television> optionalTelevision = televisionRepository.findById(id);
-//        // conditie maken of dat hij er wel is
-//        if (optionalTelevision.isPresent()) {
-//            Television storedTV = televisionRepository.findById(id).orElse(null);
-//
-//            //conditie maken om te kijken wat er gewijzigd is (if not empty → then
-//            if (television.getName() != null && !television.getName().isEmpty()) {
-//                storedTV.setName(television.getName());
-//            }
-//            if (television.getPrice() != null && !television.getPrice().isNaN()) {
-//                storedTV.setPrice(television.getPrice());
-//            }
-//            //opslaan van de wijzing in het storedBook variabele
-//            televisionRepository.save(storedTV);
-//        } else {
-//            throw new RecordNotFoundException("No Book with that id found");
-//        }
-//
-//    }
 }

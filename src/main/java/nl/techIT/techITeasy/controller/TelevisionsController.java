@@ -55,15 +55,8 @@ public class TelevisionsController {
     //Put
     @PutMapping(value = "/televisions/{id}")
     public TelevisionDto updateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
-        televisionService.updateTelevision(id, television);
-        return TelevisionDto.fromTelevision(television);
+        var existingTV = televisionService.updateTelevision(id, television);
+        return TelevisionDto.fromTelevision(existingTV);
     }
 
-    //Patch
-//    @PatchMapping(value = "/televisions/{id}")
-//    public TelevisionDto partialUpdateTelevision(@PathVariable("id") long id, @RequestBody Television television) {
-//        televisionService.partialUpdateTelevision(id, television);
-//
-//        return TelevisionDto.fromTelevision(television);
-//    }
 }

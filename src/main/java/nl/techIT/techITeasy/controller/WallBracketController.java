@@ -1,5 +1,7 @@
 package nl.techIT.techITeasy.controller;
 
+import nl.techIT.techITeasy.controller.dto.WallBracketDto;
+import nl.techIT.techITeasy.controller.dto.WallBracketInputDto;
 import nl.techIT.techITeasy.model.WallBracket;
 import nl.techIT.techITeasy.service.WallBracketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class WallBracketController {
@@ -19,36 +23,40 @@ public class WallBracketController {
     //Get
     // all
     @GetMapping(value = "/wall_brackets")
-    public ResponseEntity<Object> getAllWallBrackets() {
-        return ResponseEntity.ok(wallBracketService.getAllWallBrackets());
+    public List<WallBracketDto> getAllWallBrackets() {
+        var dtos = new ArrayList<WallBracketDto>();
+        var wallBracket = wallBracketService.getAllWallBrackets();
+
+        for (WallBracket wallbracket : wallBracket) {
+            dtos.add(WallBracketDto.fromWallBracket(wallbracket));
+        }
+        return dtos;
     }
     // one
     @GetMapping(value = "/wall_brackets/{id}")
-    public ResponseEntity<Object> getOneWallBracket(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(wallBracketService.getOneWallBracket(id));
+    public WallBracketDto getOneWallBracket(@PathVariable("id") Long id) {
+        var wallBracket = wallBracketService.getOneWallBracket(id);
+        return WallBracketDto.fromWallBracket(wallBracket);
     }
 
     //Post
     @PostMapping(value = "/wall_brackets")
-    public ResponseEntity<Object> addWallBracket(@RequestBody WallBracket wallBracket) {
-        long newID = wallBracketService.addWallBracket(wallBracket);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newID).toUri();
-
-        return ResponseEntity.created(location).build();
+    public WallBracketDto addWallBracket(@RequestBody WallBracketInputDto dto) {
+        var wallBracket = wallBracketService.addWallBracket(dto.toWallBracket());
+        return WallBracketDto.fromWallBracket(wallBracket);
     }
 
     //Delete
     @DeleteMapping(value = "/wall_brackets/{id}")
-    public ResponseEntity<Object> deleteWallBracket(@PathVariable("id") Long id) {
+    public void deleteWallBracket(@PathVariable("id") Long id) {
         wallBracketService.deleteWallBracket(id);
-        return ResponseEntity.noContent().build();
     }
 
     //Update
     @PutMapping(value = "/wall_brackets/{id}")
-    public ResponseEntity<Object> updateWallBracket(@PathVariable("id") Long id, @RequestBody WallBracket wallBracket){
-        wallBracketService.updateWallBracket(id, wallBracket);
-        return ResponseEntity.ok().build();
+    public WallBracketDto updateWallBracket(@PathVariable("id") Long id, @RequestBody WallBracket wallBracket){
+        var existingWallBracket = wallBracketService.updateWallBracket(id, wallBracket);
+        return WallBracketDto.fromWallBracket(existingWallBracket);
     }
 
 }
