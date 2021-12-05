@@ -3,7 +3,9 @@ package nl.techIT.techITeasy.service;
 import nl.techIT.techITeasy.controller.dto.TelevisionDto;
 import nl.techIT.techITeasy.exceptions.BadRequestException;
 import nl.techIT.techITeasy.exceptions.RecordNotFoundException;
+import nl.techIT.techITeasy.model.RemoteController;
 import nl.techIT.techITeasy.model.Television;
+import nl.techIT.techITeasy.repository.RemoteControllerRepository;
 import nl.techIT.techITeasy.repository.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,13 @@ import java.util.Optional;
 @Service
 public class TelevisionService {
 
-    @Autowired
     private final TelevisionRepository televisionRepository;
+    private final RemoteControllerRepository remoteControllerRepository;
 
     @Autowired
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService (TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository) {
         this.televisionRepository = televisionRepository;
-    }
+        this.remoteControllerRepository = remoteControllerRepository;}
 
     //Services ombouwen naar ontvangsten DTO, je ontvangt niet meer het object maar de data(DTO)
 
@@ -63,11 +65,10 @@ public class TelevisionService {
         } else {
             throw new BadRequestException("ID not found!");
         }
-
     }
 
     public Television updateTelevision(long id, Television television) {
-        if (!televisionRepository.existsById(id)){
+        if (!televisionRepository.existsById(id)) {
             throw new RecordNotFoundException("Television not found");
         } else {
             Television storedTelevision = televisionRepository.findById(id).orElse(null);
@@ -94,4 +95,24 @@ public class TelevisionService {
             return storedTelevision;
         }
     }
+
+    public void assignRemoteControllerToTelevision(Long id, Long remotecontrollerId) {
+        var optionalTelevision = televisionRepository.findById(id);
+        var optionalRemoteController = remoteControllerRepository.findById(remotecontrollerId);
+
+        if(optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
+            var television = optionalTelevision.get();
+            var remoteController = optionalRemoteController.get();
+
+            television.setRemoteController(remoteController);
+            televisionRepository.save(television);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
+
+    public List<Television> getAllTelevisionsFromABrand(String brand) {
+        return televisionRepository.findAllByBrandContainingIgnoreCase(brand);
+    }
+
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column
@@ -41,6 +42,21 @@ public class Television {
     private Integer originalStock;
     @Column
     private Integer sold;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "television")
+    @JoinColumn(name = "remotecontroller_id", referencedColumnName = "id")
+    private RemoteController remoteController;
+
+    //getters and setter voor relatie
+
+    public RemoteController getRemoteController() {
+        return remoteController;
+    }
+
+    public void setRemoteController(RemoteController remoteController) {
+        this.remoteController = remoteController;
+    }
+
 
     // Een default constructor is niet nodig -> SB maakt deze zelf
 

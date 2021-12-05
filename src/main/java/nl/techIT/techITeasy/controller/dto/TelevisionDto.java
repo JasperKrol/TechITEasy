@@ -22,6 +22,7 @@ public class TelevisionDto {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
+    public RemoteControllerDto remoteController;
 
     //Methods
     public static TelevisionDto fromTelevision(Television television) {

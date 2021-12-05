@@ -9,6 +9,7 @@ public class RemoteController {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "compatible_with")
@@ -21,6 +22,19 @@ public class RemoteController {
     @Column(name = "original_stock")
     private Integer originalStock;
     private Integer sold;
+
+    @OneToOne
+    private Television television;
+    //getters and setter voor relatie
+
+    public Television getTelevision() {
+        return television;
+    }
+
+    public void setTelevision(Television television) {
+        this.television = television;
+    }
+
 
     //Contructor not needed
     // Getters and setters
