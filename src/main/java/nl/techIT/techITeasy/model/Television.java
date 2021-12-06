@@ -7,47 +7,34 @@ import javax.persistence.*;
 public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column
     private String type;
-    @Column
     private String brand;
-    @Column
     private String name;
-    @Column
     private Double price;
-    @Column(name = "available_size")
     private Double availableSize;
-    @Column(name = "refresh_rate")
     private Double refreshRate;
-    @Column(name = "screen_type")
     private String screenType;
-    @Column(name = "screen_quality")
     private String screenQuality;
-    @Column(name = "smart_tv")
     private Boolean smartTv;
-    @Column
     private Boolean wifi;
-    @Column(name = "voice_control")
     private Boolean voiceControl;
-    @Column
     private Boolean hdr;
-    @Column
     private Boolean bluetooth;
-    @Column(name = "ambi_light")
     private Boolean ambiLight;
-    @Column(name = "original_stock")
     private Integer originalStock;
-    @Column
     private Integer sold;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "television")
-    @JoinColumn(name = "remotecontroller_id", referencedColumnName = "id")
+    @OneToOne
+//    @JoinColumn(name = "remotecontroller_id", referencedColumnName = "id")
     private RemoteController remoteController;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ci_module_id", referencedColumnName = "id")
+    private CIModule ciModule;
+
     //getters and setter voor relatie
+
 
     public RemoteController getRemoteController() {
         return remoteController;
@@ -57,6 +44,13 @@ public class Television {
         this.remoteController = remoteController;
     }
 
+    public CIModule getCiModule() {
+        return ciModule;
+    }
+
+    public void setCiModule(CIModule ciModule) {
+        this.ciModule = ciModule;
+    }
 
     // Een default constructor is niet nodig -> SB maakt deze zelf
 
@@ -197,4 +191,6 @@ public class Television {
     public void setSold(Integer sold) {
         this.sold = sold;
     }
+
+
 }

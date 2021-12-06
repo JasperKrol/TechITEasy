@@ -3,8 +3,10 @@ package nl.techIT.techITeasy.service;
 import nl.techIT.techITeasy.controller.dto.TelevisionDto;
 import nl.techIT.techITeasy.exceptions.BadRequestException;
 import nl.techIT.techITeasy.exceptions.RecordNotFoundException;
+import nl.techIT.techITeasy.model.CIModule;
 import nl.techIT.techITeasy.model.RemoteController;
 import nl.techIT.techITeasy.model.Television;
+import nl.techIT.techITeasy.repository.CIModuleRepository;
 import nl.techIT.techITeasy.repository.RemoteControllerRepository;
 import nl.techIT.techITeasy.repository.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,16 @@ import java.util.Optional;
 @Service
 public class TelevisionService {
 
-    private final TelevisionRepository televisionRepository;
-    private final RemoteControllerRepository remoteControllerRepository;
+    private TelevisionRepository televisionRepository;
+    private RemoteControllerRepository remoteControllerRepository;
+    private CIModuleRepository ciModuleRepository;
 
     @Autowired
-    public TelevisionService (TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository) {
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository, CIModuleRepository ciModuleRepository) {
         this.televisionRepository = televisionRepository;
-        this.remoteControllerRepository = remoteControllerRepository;}
+        this.remoteControllerRepository = remoteControllerRepository;
+        this.ciModuleRepository = ciModuleRepository;
+    }
 
     //Services ombouwen naar ontvangsten DTO, je ontvangt niet meer het object maar de data(DTO)
 
@@ -47,11 +52,11 @@ public class TelevisionService {
         }
     }
 
-    public Television addTelevision(Television television) {
+    public Television createTelevision(Television television) {
         //argument voor als tv al bestaat → name
-        String tvName = television.getName();
-        //haal de tv's op en controleer of ze aanwezig zijn
-        List<Television> televisions = (List<Television>) televisionRepository.findAllByName(tvName);
+        String name = television.getName();
+        List<Television> televisions = (List<Television>) televisionRepository.findAllByName(name);
+
         if (televisions.size() > 0) {
             throw new BadRequestException("TV Already exists");
         } else {
@@ -96,16 +101,17 @@ public class TelevisionService {
         }
     }
 
-    public void assignRemoteControllerToTelevision(Long id, Long remotecontrollerId) {
+    public Television assignRemoteControllerToTelevision(Long id, Long remotecontrollerId) {
         var optionalTelevision = televisionRepository.findById(id);
         var optionalRemoteController = remoteControllerRepository.findById(remotecontrollerId);
 
-        if(optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
+        if (optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
             var television = optionalTelevision.get();
             var remoteController = optionalRemoteController.get();
 
             television.setRemoteController(remoteController);
             televisionRepository.save(television);
+            return television;
         } else {
             throw new RecordNotFoundException();
         }
@@ -113,6 +119,21 @@ public class TelevisionService {
 
     public List<Television> getAllTelevisionsFromABrand(String brand) {
         return televisionRepository.findAllByBrandContainingIgnoreCase(brand);
+    }
+
+    public void assignCIModuleToTelevision(Long id, Long ciModuleId) {
+        var optionalTelevision = televisionRepository.findById(id);
+        var optionalCIModule = ciModuleRepository.findById(ciModuleId);
+
+        if (optionalTelevision.isPresent() && optionalCIModule.isPresent()) {
+            var television = optionalTelevision.get();
+            var ciModule = optionalCIModule.get();
+
+            television.setCiModule(ciModule);
+            televisionRepository.save(television);
+        } else {
+            throw new RecordNotFoundException();
+        }
     }
 
 }

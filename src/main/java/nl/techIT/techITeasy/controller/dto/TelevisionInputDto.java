@@ -22,6 +22,7 @@ public class TelevisionInputDto {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
+    public RemoteControllerDto remoteControllerDto;
 
     //Methods
     // hier instantieer je het object en zet je de waardes

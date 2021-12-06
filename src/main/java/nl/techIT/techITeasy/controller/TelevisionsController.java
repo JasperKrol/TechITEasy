@@ -42,11 +42,11 @@ public class TelevisionsController {
     //Post
     //Je wilt alles via de DTO laten lopen, parameters DTO -> input
     @PostMapping(value = "/televisions")
-    public TelevisionDto addTelevision(@RequestBody TelevisionInputDto dto) {
-        var television = televisionService.addTelevision(dto.toTelevision());
-
+    public TelevisionDto createTelevision(@RequestBody TelevisionInputDto dto){
+        var television = televisionService.createTelevision(dto.toTelevision());
         return TelevisionDto.fromTelevision(television);
     }
+
 
     //Delete
     @DeleteMapping(value = "/televisions/{id}")
@@ -63,8 +63,9 @@ public class TelevisionsController {
 
     //PUT ASSIGN REMOTE TO TV
     @PutMapping("/televisions/{id}/remote_controller")
-    public void assignRemoteControllerToTelevision(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
-        televisionService.assignRemoteControllerToTelevision(id, input.id);
+    public Television assignRemoteControllerToTelevision(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
+        var television =televisionService.assignRemoteControllerToTelevision(id, input.id);
+        return television;
     }
 
     //GET ALL TV FROM A BRAND
@@ -82,10 +83,10 @@ public class TelevisionsController {
         return dtos;
     }
 
-//    @PutMapping("/televisions/{id}/{ciModuleId}")
-//    public void assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
-//        televisionService.assignCIModuleToTelevision(id, ciModuleId);
-//    }
+    @PutMapping("/televisions/{id}/{ciModuleId}")
+    public void assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
+        televisionService.assignCIModuleToTelevision(id, ciModuleId);
+    }
 //
 //    @GetMapping("/televisions/wallBrackets/{televisionId}")
 //    public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){

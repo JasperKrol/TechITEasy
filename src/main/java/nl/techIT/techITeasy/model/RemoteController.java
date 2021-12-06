@@ -9,21 +9,17 @@ public class RemoteController {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "compatible_with")
     private String compatibleWith;
-    @Column(name = "battery_type")
     private String batteryType;
     private String brand;
     private String name;
     private Double price;
-    @Column(name = "original_stock")
     private Integer originalStock;
     private Integer sold;
 
-    @OneToOne
+    @OneToOne(mappedBy = "remoteController")
+//    @JoinColumn(name = "television_id", referencedColumnName = "id")
     private Television television;
     //getters and setter voor relatie
 

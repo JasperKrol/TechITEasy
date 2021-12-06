@@ -1,6 +1,9 @@
 package nl.techIT.techITeasy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ci_modules")
@@ -13,7 +16,19 @@ public class CIModule {
     private String type;
     private Double price;
 
+    @OneToMany(mappedBy = "ciModule", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Television> televisions;
+
     //Getters and setters
+
+    public List<Television> getTelevisions() {
+        return televisions;
+    }
+
+    public void setTelevisions(List<Television> televisions) {
+        this.televisions = televisions;
+    }
 
     public Long getId() {
         return id;
