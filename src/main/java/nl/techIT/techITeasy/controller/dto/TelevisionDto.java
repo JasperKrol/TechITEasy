@@ -23,6 +23,7 @@ public class TelevisionDto {
     public Integer originalStock;
     public Integer sold;
     public RemoteControllerDto remoteController;
+    public CIModuleDto ciModule;
 
     //Methods
     public static TelevisionDto fromTelevision(Television television) {

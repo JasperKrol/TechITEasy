@@ -83,11 +83,11 @@ public class TelevisionsController {
         return dtos;
     }
 
-    @PutMapping("/televisions/{id}/{ciModuleId}")
+    @PutMapping("/televisions/{id}/ci_module")
     public void assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
         televisionService.assignCIModuleToTelevision(id, ciModuleId);
     }
-//
+
 //    @GetMapping("/televisions/wallBrackets/{televisionId}")
 //    public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){
 //        return televisionWallBracketService.getTelevisionWallBracketByTelevisionId(televisionId);
