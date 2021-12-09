@@ -14,7 +14,7 @@ import java.util.List;
 
 //aangeven dat dit een controller is
 @RestController
-public class TelevisionsController {
+public class TelevisionController {
 
     //Maak een link met de repository laag
     @Autowired
@@ -42,11 +42,10 @@ public class TelevisionsController {
     //Post
     //Je wilt alles via de DTO laten lopen, parameters DTO -> input
     @PostMapping(value = "/televisions")
-    public TelevisionDto createTelevision(@RequestBody TelevisionInputDto dto){
+    public TelevisionDto createTelevision(@RequestBody TelevisionInputDto dto) {
         var television = televisionService.createTelevision(dto.toTelevision());
         return TelevisionDto.fromTelevision(television);
     }
-
 
     //Delete
     @DeleteMapping(value = "/televisions/{id}")
@@ -61,20 +60,13 @@ public class TelevisionsController {
         return TelevisionDto.fromTelevision(existingTV);
     }
 
-    //PUT ASSIGN REMOTE TO TV
-    @PutMapping("/televisions/{id}/remote_controller")
-    public Television assignRemoteControllerToTelevision(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
-        var television =televisionService.assignRemoteControllerToTelevision(id, input.id);
-        return television;
-    }
-
     //GET ALL TV FROM A BRAND
     @GetMapping("/televisions?brand={brand}")
     public List<TelevisionDto> getAllTelevisionsFromABrand(@RequestParam String brand) {
 
         var dtos = new ArrayList<TelevisionDto>();
 
-        var televisions = televisionService.getAllTelevisionsFromABrand(brand);
+        var televisions = televisionService.getAllTelevisionsByBrand(brand);
 
         for (Television television : televisions) {
             dtos.add(TelevisionDto.fromTelevision(television));
@@ -83,13 +75,18 @@ public class TelevisionsController {
         return dtos;
     }
 
+    @PutMapping("/televisions/{id}/remote_controller")
+    public void assignRemoteControllerToTelevision(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
+        televisionService.assignRemoteControllerToTelevision(id, input.id);
+    }
+
     @PutMapping("/televisions/{id}/ci_module")
     public void assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
         televisionService.assignCIModuleToTelevision(id, ciModuleId);
     }
 
-//    @GetMapping("/televisions/wallBrackets/{televisionId}")
-//    public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){
-//        return televisionWallBracketService.getTelevisionWallBracketByTelevisionId(televisionId);
-//    }
+    //    @GetMapping("/televisions/wallBrackets/{televisionId}")
+    //    public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){
+    //        return televisionWallBracketService.getTelevisionWallBracketByTelevisionId(televisionId);
+    //    }
 }

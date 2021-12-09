@@ -31,7 +31,6 @@ public class TelevisionService {
     }
 
     //Services ombouwen naar ontvangsten DTO, je ontvangt niet meer het object maar de data(DTO)
-
     public List<TelevisionDto> getAllTelevisions() {
         var dtos = new ArrayList<TelevisionDto>();
         var televisions = televisionRepository.findAll();
@@ -44,11 +43,10 @@ public class TelevisionService {
 
     public Television getTelevision(Long id) {
         Optional<Television> television = televisionRepository.findById(id);
-
-        if (television.isPresent()) {
+        if(television.isPresent()) {
             return television.get();
         } else {
-            throw new RecordNotFoundException("ID not found");
+            throw new RecordNotFoundException("No television found");
         }
     }
 
@@ -101,39 +99,37 @@ public class TelevisionService {
         }
     }
 
-    public Television assignRemoteControllerToTelevision(Long id, Long remotecontrollerId) {
+    public List<Television> getAllTelevisionsByBrand(String brand) {
+        return televisionRepository.findAllByBrandContainingIgnoreCase(brand);
+    }
+
+    public void assignRemoteControllerToTelevision(Long id, Long remotecontrollerId) {
         var optionalTelevision = televisionRepository.findById(id);
         var optionalRemoteController = remoteControllerRepository.findById(remotecontrollerId);
 
-        if (optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
+        if(optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
             var television = optionalTelevision.get();
             var remoteController = optionalRemoteController.get();
 
             television.setRemoteController(remoteController);
             televisionRepository.save(television);
-            return television;
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("NO ID FOUND");
         }
-    }
-
-    public List<Television> getAllTelevisionsFromABrand(String brand) {
-        return televisionRepository.findAllByBrandContainingIgnoreCase(brand);
     }
 
     public void assignCIModuleToTelevision(Long id, Long ciModuleId) {
         var optionalTelevision = televisionRepository.findById(id);
         var optionalCIModule = ciModuleRepository.findById(ciModuleId);
 
-        if (optionalTelevision.isPresent() && optionalCIModule.isPresent()) {
+        if(optionalTelevision.isPresent() && optionalCIModule.isPresent()) {
             var television = optionalTelevision.get();
             var ciModule = optionalCIModule.get();
 
             television.setCiModule(ciModule);
             televisionRepository.save(television);
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("NO ID FOUND");
         }
     }
-
 }

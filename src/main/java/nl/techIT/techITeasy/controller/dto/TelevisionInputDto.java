@@ -22,7 +22,9 @@ public class TelevisionInputDto {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
-    public RemoteControllerDto remoteControllerDto;
+    public RemoteControllerDto remoteController;
+    public CIModuleDto ciModule;
+    public WallBracketDto wallBracketDto;
 
     //Methods
     // hier instantieer je het object en zet je de waardes
@@ -45,6 +47,7 @@ public class TelevisionInputDto {
         television.setAmbiLight(ambiLight);
         television.setOriginalStock(originalStock);
         television.setSold(sold);
+        //input dto aanpassen
         return television;
     }
 }

@@ -1,6 +1,7 @@
 package nl.techIT.techITeasy.controller.dto;
 
 import nl.techIT.techITeasy.model.Television;
+import org.springframework.lang.Nullable;
 
 public class TelevisionDto {
 
@@ -22,6 +23,7 @@ public class TelevisionDto {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
+    // kijken naar NULLABLE
     public RemoteControllerDto remoteController;
     public CIModuleDto ciModule;
 
@@ -46,6 +48,8 @@ public class TelevisionDto {
         dto.ambiLight = television.getAmbiLight();
         dto.originalStock = television.getOriginalStock();
         dto.sold = television.getSold();
+        dto.remoteController = RemoteControllerDto.fromRemoteController(television.getRemoteController());
+
         return dto;
     }
 }

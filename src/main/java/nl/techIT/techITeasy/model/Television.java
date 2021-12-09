@@ -29,7 +29,7 @@ public class Television {
 //    @JoinColumn(name = "remotecontroller_id", referencedColumnName = "id")
     private RemoteController remoteController;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ci_module_id", referencedColumnName = "id")
     private CIModule ciModule;
 
