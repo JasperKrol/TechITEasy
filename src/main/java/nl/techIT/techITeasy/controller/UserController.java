@@ -5,6 +5,7 @@ import nl.techIT.techITeasy.model.User;
 import nl.techIT.techITeasy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -46,6 +47,24 @@ public class UserController {
     @PutMapping(value = "/{username}")
     public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody User user){
         userService.updateUser(username, user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{username}")
+    public ResponseEntity deleteUser (@PathVariable("username") String username){
+        userService.deleteUser(username);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{username}/authorities/{authority}")
+    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authorityString){
+        userService.removeAuthority(username,authorityString);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(value = "/{username}/password")
+    public ResponseEntity<Object> setPassword(@PathVariable("username") String username, @RequestBody String userPassword){
+        userService.setPassword(username,userPassword);
         return ResponseEntity.noContent().build();
     }
 }

@@ -42,7 +42,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?").authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
 
     }
 
@@ -63,7 +65,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 //HTTP Basic authentication
-                .httpBasic().and().authorizeRequests().antMatchers(PATCH, "/users/{^[\\w]$}/password").authenticated().antMatchers("/users/**").hasRole("ADMIN").antMatchers("/books/**").hasRole("USER").antMatchers("/persons/**").hasAnyRole("USER").antMatchers(HttpMethod.GET, "hello").authenticated().antMatchers(HttpMethod.GET, "goodbye").permitAll().anyRequest().permitAll().and().csrf().disable().formLogin().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers(PATCH,"/users/{^[\\w]$}/password").authenticated()
+                .antMatchers("/users/**").hasRole("ADMIN")
+                .antMatchers("/books/**").hasRole("USER")
+                .antMatchers("/persons/**").hasAnyRole("USER")
+                .antMatchers(HttpMethod.GET, "hello").authenticated()
+                .antMatchers(HttpMethod.GET, "goodbye").permitAll()
+                .anyRequest().permitAll()
+                .and()
+                .csrf().disable()
+                .formLogin().disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
