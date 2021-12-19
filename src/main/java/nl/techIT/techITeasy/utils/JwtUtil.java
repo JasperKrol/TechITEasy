@@ -1,4 +1,4 @@
-package nl.techIT.techITeasy.security;
+package nl.techIT.techITeasy.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

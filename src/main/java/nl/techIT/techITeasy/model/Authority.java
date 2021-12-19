@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "authorities")
 @IdClass(AuthorityKey.class)
-public class Authority implements Serializable{
+@Table(name = "authorities")
+public class Authority implements Serializable {
 
-    @javax.persistence.Id
+    @Id
     @Column(nullable = false)
     private String username;
 
@@ -16,15 +16,11 @@ public class Authority implements Serializable{
     @Column(nullable = false)
     private String authority;
 
-    // constructors
-
     public Authority() {}
     public Authority(String username, String authority) {
         this.username = username;
         this.authority = authority;
     }
-
-    // getters and setters
 
     public String getUsername() {
         return username;
@@ -38,5 +34,4 @@ public class Authority implements Serializable{
     public void setAuthority(String authority) {
         this.authority = authority;
     }
-
 }

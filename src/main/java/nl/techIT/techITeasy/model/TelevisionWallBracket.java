@@ -3,6 +3,7 @@ package nl.techIT.techITeasy.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "television_wallbracket")
 public class TelevisionWallBracket {
 
     @EmbeddedId
@@ -18,7 +19,9 @@ public class TelevisionWallBracket {
     @JoinColumn(name = "wall_bracket_id")
     private WallBracket wallBracket;
 
-
+    public TelevisionWallBracketKey getId() {
+        return id;
+    }
 
     public Television getTelevision() {
         return television;
@@ -28,6 +31,9 @@ public class TelevisionWallBracket {
         return wallBracket;
     }
 
+    public void setId(TelevisionWallBracketKey id) {
+        this.id = id;
+    }
 
     public void setTelevision(Television television) {
         this.television = television;
@@ -35,13 +41,5 @@ public class TelevisionWallBracket {
 
     public void setWallBracket(WallBracket wallBracket) {
         this.wallBracket = wallBracket;
-    }
-
-    public TelevisionWallBracketKey getId() {
-        return id;
-    }
-
-    public void setId(TelevisionWallBracketKey id) {
-        this.id = id;
     }
 }

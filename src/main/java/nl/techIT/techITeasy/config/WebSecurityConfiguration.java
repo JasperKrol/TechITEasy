@@ -1,6 +1,6 @@
 package nl.techIT.techITeasy.config;
 
-import nl.techIT.techITeasy.security.JwtRequestFilter;
+import nl.techIT.techITeasy.utils.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,24 +63,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //JWT token authentication
         http
-                //HTTP Basic authentication
-                .httpBasic()
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(PATCH,"/users/{^[\\w]$}/password").authenticated()
-                .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers("/books/**").hasRole("USER")
-                .antMatchers("/persons/**").hasAnyRole("USER")
-                .antMatchers(HttpMethod.GET, "hello").authenticated()
-                .antMatchers(HttpMethod.GET, "goodbye").permitAll()
+                .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .antMatchers("/authenticated").authenticated()
+                .antMatchers("/authenticate").permitAll()
                 .anyRequest().permitAll()
                 .and()
-                .csrf().disable()
-                .formLogin().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }

@@ -3,7 +3,7 @@ package nl.techIT.techITeasy.service;
 import nl.techIT.techITeasy.controller.dto.AuthenticationRequestDto;
 import nl.techIT.techITeasy.controller.dto.AuthenticationResponseDto;
 import nl.techIT.techITeasy.exceptions.UserNotFoundException;
-import nl.techIT.techITeasy.security.JwtUtil;
+import nl.techIT.techITeasy.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
