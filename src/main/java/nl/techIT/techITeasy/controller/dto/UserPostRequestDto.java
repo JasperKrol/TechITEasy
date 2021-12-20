@@ -7,6 +7,7 @@ public class UserPostRequestDto {
     private String username;
     private String password;
     private String email;
+    public String apikey;
     private Set<String> authorities;
 
     public String getUsername() {
@@ -23,6 +24,14 @@ public class UserPostRequestDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getApikey() {
+        return apikey;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
     }
 
     public String getEmail() {

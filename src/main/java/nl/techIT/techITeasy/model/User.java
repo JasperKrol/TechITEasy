@@ -17,6 +17,10 @@ public class User {
     @Column(nullable = false)
     private boolean enabled = true;
 
+    @Column
+    private String apikey;
+
+    @Column
     private String email;
 
     @OneToMany(targetEntity = Authority.class, mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -45,6 +49,9 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public String getApikey() { return apikey; }
+    public void setApikey(String apikey) { this.apikey = apikey; }
 
     public String getEmail() {
         return email;

@@ -4,11 +4,15 @@ import nl.techIT.techITeasy.controller.dto.IdInputDto;
 import nl.techIT.techITeasy.controller.dto.TelevisionDto;
 import nl.techIT.techITeasy.controller.dto.TelevisionInputDto;
 import nl.techIT.techITeasy.model.Television;
+import nl.techIT.techITeasy.model.WallBracket;
 import nl.techIT.techITeasy.service.TelevisionService;
+import nl.techIT.techITeasy.service.TelevisionWallBracketService;
+import nl.techIT.techITeasy.service.WallBracketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -17,8 +21,15 @@ import java.util.List;
 public class TelevisionController {
 
     //Maak een link met de repository laag
-    @Autowired
+
     private TelevisionService televisionService;
+    private TelevisionWallBracketService televisionWallBracketService;
+
+    @Autowired
+    public TelevisionController(TelevisionService televisionService, TelevisionWallBracketService televisionWallBracketService){
+        this.televisionService = televisionService;
+        this.televisionWallBracketService = televisionWallBracketService;
+    }
 
     //CRUD Requests
     //PathVaribale? Dan krijg je in de param @pathvariable
@@ -85,8 +96,8 @@ public class TelevisionController {
         televisionService.assignCIModuleToTelevision(id, ciModuleId);
     }
 
-    //    @GetMapping("/televisions/wallBrackets/{televisionId}")
-    //    public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){
-    //        return televisionWallBracketService.getTelevisionWallBracketByTelevisionId(televisionId);
-    //    }
+        @GetMapping("/televisions/wallBrackets/{televisionId}")
+        public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){
+            return televisionWallBracketService.getTelevisionWallBracketByTelevisionId(televisionId);
+        }
 }

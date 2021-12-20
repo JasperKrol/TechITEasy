@@ -8,14 +8,17 @@ import nl.techIT.techITeasy.exceptions.UserNotFoundException;
 import nl.techIT.techITeasy.model.Authority;
 import nl.techIT.techITeasy.model.User;
 import nl.techIT.techITeasy.repository.UserRepository;
+import nl.techIT.techITeasy.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -40,10 +43,12 @@ public class UserService {
     public String createUser(UserPostRequestDto userPostRequest){
         try {
             String encryptedPassword = passwordEncoder.encode(userPostRequest.getPassword());
+            String apiKey = RandomStringGenerator.generateAlphaNumeric(20);
 
             User user = new User();
             user.setUsername(userPostRequest.getUsername());
             user.setPassword(encryptedPassword);
+            user.setApikey(apiKey);
             user.setEmail(userPostRequest.getEmail());
             user.setEnabled(true);
             user.addAuthority("ROLE_USER");
@@ -97,6 +102,12 @@ public class UserService {
             existingUser.removeAuthority(authorityString);
             userRepository.save(existingUser);
         }
+    }
+
+    public Set<Authority> getAuthorities(String username) {
+        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+        User user = userRepository.findById(username).get();
+        return user.getAuthorities();
     }
 
     //Userpassword
